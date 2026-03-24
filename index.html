@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marc Glass Strategic Communications and Photography</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2b4a;
+      --gold: #c9a84c;
+      --white: #ffffff;
+      --off-white: #f8f7f4;
+      --gray-light: #f0eeea;
+      --gray-mid: #d0ccc4;
+      --gray-text: #888076;
+      --text: #1e1e1e;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+      --nav-h: 72px;
+      --max-w: 1200px;
+      --transition: 0.3s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--text); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(255,255,255,0.97); backdrop-filter: blur(10px); border-bottom: 1px solid var(--gray-light); z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; transition: box-shadow var(--transition); }
+    nav.scrolled { box-shadow: 0 2px 24px rgba(26,43,74,0.09); }
+    .nav-logo { font-family: var(--font-display); font-size: 1.18rem; font-weight: 600; color: var(--navy); text-decoration: none; letter-spacing: 0.01em; line-height: 1.2; cursor: pointer; }
+    .nav-logo span { display: block; font-weight: 300; font-size: 0.72rem; font-family: var(--font-body); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+
+    /* HAMBURGER */
+    .hamburger { display: flex; flex-direction: column; gap: 6px; cursor: pointer; padding: 6px; background: none; border: none; z-index: 1100; }
+    .hamburger span { display: block; width: 28px; height: 1.5px; background: var(--navy); transition: all 0.35s ease; transform-origin: center; }
+    .hamburger.open span { background: var(--white); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+    /* OVERLAY MENU */
+    .overlay-menu { position: fixed; inset: 0; background: var(--navy); z-index: 1050; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .overlay-menu.open { opacity: 1; pointer-events: all; }
+    .overlay-menu a { font-family: var(--font-display); font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 300; color: rgba(255,255,255,0.7); text-decoration: none; letter-spacing: 0.02em; padding: 8px 0; opacity: 0; transform: translateY(16px); transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease, letter-spacing 0.3s ease; }
+    .overlay-menu.open a { opacity: 1; transform: translateY(0); }
+    .overlay-menu.open a:nth-child(1)  { transition-delay: 0.05s; }
+    .overlay-menu.open a:nth-child(2)  { transition-delay: 0.10s; }
+    .overlay-menu.open a:nth-child(3)  { transition-delay: 0.15s; }
+    .overlay-menu.open a:nth-child(4)  { transition-delay: 0.20s; }
+    .overlay-menu.open a:nth-child(5)  { transition-delay: 0.25s; }
+    .overlay-menu.open a:nth-child(6)  { transition-delay: 0.30s; }
+    .overlay-menu.open a:nth-child(7)  { transition-delay: 0.35s; }
+    .overlay-menu.open a:nth-child(9)  { transition-delay: 0.40s; }
+    .overlay-menu.open a:nth-child(10) { transition-delay: 0.45s; }
+    .overlay-menu a:hover { color: var(--gold); letter-spacing: 0.06em; }
+    .overlay-divider { width: 40px; height: 1px; background: rgba(201,168,76,0.35); margin: 14px 0; opacity: 0; transition: opacity 0.4s ease 0.5s; }
+    .overlay-menu.open .overlay-divider { opacity: 1; }
+
+    /* PAGES */
+    .page { display: none; padding-top: var(--nav-h); min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* HERO */
+    .hero { min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: var(--max-w); margin: 0 auto; padding: 80px 40px; gap: 72px; }
+    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px; }
+    .hero-text h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.1; color: var(--navy); margin-bottom: 24px; }
+    .hero-text h1 em { font-style: italic; color: var(--gold); }
+    .hero-text p { font-size: 1.02rem; color: var(--gray-text); max-width: 400px; line-height: 1.8; margin-bottom: 36px; }
+    .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 12px 28px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all var(--transition); }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--gold); color: var(--navy); }
+    .btn-outline { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* HERO PHOTO GRID — all horizontal (landscape) thumbnails, 3 cols × 2 rows */
+    .hero-photo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; width: 100%; }
+    .hero-thumb { overflow: hidden; aspect-ratio: 16/10; background: var(--gray-light); cursor: pointer; position: relative; width: 100%; }
+    .hero-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .hero-thumb:hover img { transform: scale(1.05); }
+    .hero-thumb-ph { width: 100%; height: 100%; min-height: 110px; background: linear-gradient(135deg, var(--gray-light), var(--gray-mid)); display: flex; align-items: center; justify-content: center; color: var(--gray-text); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .hero-thumb::after { content: ''; position: absolute; inset: 0; border: 2px solid var(--gold); opacity: 0; transition: opacity var(--transition); pointer-events: none; }
+    .hero-thumb:hover::after { opacity: 1; }
+    .hero-thumb-overlay { position: absolute; inset: 0; background: rgba(26,43,74,0); display: flex; align-items: flex-end; padding: 10px; transition: background var(--transition); }
+    .hero-thumb:hover .hero-thumb-overlay { background: rgba(26,43,74,0.45); }
+    .hero-thumb-label { font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--white); opacity: 0; transform: translateY(6px); transition: all var(--transition); }
+    .hero-thumb:hover .hero-thumb-label { opacity: 1; transform: translateY(0); }
+
+    /* HOME SERVICES */
+    .home-sections { background: var(--off-white); padding: 80px 0; }
+    .home-sections-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+    .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+    .home-sections h2 { font-family: var(--font-display); font-size: 2.4rem; font-weight: 300; color: var(--navy); margin-bottom: 48px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; }
+    .service-card { background: var(--white); padding: 36px 28px; transition: background var(--transition); cursor: pointer; }
+    .service-card:hover { background: var(--navy); }
+    .service-card:hover .service-title, .service-card:hover .service-num { color: var(--white); }
+    .service-card:hover .service-desc { color: rgba(255,255,255,0.55); }
+    .service-card:hover .service-arrow { color: var(--gold); }
+    .service-num { font-family: var(--font-display); font-size: 2.5rem; font-weight: 300; color: var(--gray-mid); line-height: 1; margin-bottom: 16px; transition: color var(--transition); }
+    .service-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--navy); margin-bottom: 10px; transition: color var(--transition); }
+    .service-desc { font-size: 0.85rem; color: var(--gray-text); line-height: 1.7; transition: color var(--transition); }
+    .service-arrow { display: block; margin-top: 20px; font-size: 1.2rem; color: var(--gray-mid); transition: color var(--transition); }
+
+    /* SECTION HEADER */
+    .section-header { max-width: var(--max-w); margin: 0 auto; padding: 80px 40px 48px; }
+    .section-header .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+    .section-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--navy); line-height: 1.15; margin-bottom: 16px; }
+    .section-header p { font-size: 1rem; color: var(--gray-text); max-width: 560px; line-height: 1.7; }
+    .divider { width: 48px; height: 2px; background: var(--gold); margin: 24px 0 0; }
+
+    /* CARD GRID */
+    .card-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
+    .card { background: var(--white); border: 1px solid var(--gray-light); display: flex; flex-direction: column; transition: box-shadow var(--transition), transform var(--transition); }
+    .card:hover { box-shadow: 0 12px 40px rgba(26,43,74,0.1); transform: translateY(-4px); }
+    .card-thumb { width: 100%; aspect-ratio: 16/9; background: var(--gray-light); overflow: hidden; position: relative; }
+    .card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .card:hover .card-thumb img { transform: scale(1.04); }
+    .card-thumb-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--gray-light), var(--gray-mid)); display: flex; align-items: center; justify-content: center; color: var(--gray-text); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 8px; }
+    .card-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--navy); line-height: 1.3; margin-bottom: 10px; }
+    .card-excerpt { font-size: 0.88rem; color: var(--gray-text); line-height: 1.7; flex: 1; margin-bottom: 20px; }
+    .card-link { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color var(--transition); }
+    .card-link::after { content: '→'; transition: transform var(--transition); }
+    .card-link:hover { color: var(--gold); }
+    .card-link:hover::after { transform: translateX(4px); }
+
+    /* MASONRY */
+    .masonry-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; columns: 3; column-gap: 16px; }
+    .masonry-item { break-inside: avoid; margin-bottom: 16px; overflow: hidden; cursor: pointer; position: relative; }
+    .masonry-item img { width: 100%; display: block; transition: transform 0.5s ease; }
+    .masonry-item:hover img { transform: scale(1.03); }
+    .masonry-item-overlay { position: absolute; inset: 0; background: rgba(26,43,74,0); display: flex; align-items: flex-end; padding: 20px; transition: background var(--transition); }
+    .masonry-item:hover .masonry-item-overlay { background: rgba(26,43,74,0.55); }
+    .masonry-caption { color: var(--white); font-size: 0.85rem; font-family: var(--font-display); font-style: italic; opacity: 0; transform: translateY(8px); transition: all var(--transition); }
+    .masonry-item:hover .masonry-caption { opacity: 1; transform: translateY(0); }
+    .masonry-placeholder { background: var(--gray-light); display: flex; align-items: center; justify-content: center; break-inside: avoid; margin-bottom: 16px; color: var(--gray-text); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(10,16,28,0.95); z-index: 9999; align-items: center; justify-content: center; padding: 40px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; box-shadow: 0 0 80px rgba(0,0,0,0.5); }
+    .lightbox-close { position: absolute; top: 24px; right: 32px; color: var(--white); font-size: 2.2rem; cursor: pointer; font-weight: 300; line-height: 1; opacity: 0.6; background: none; border: none; transition: opacity var(--transition); }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-caption { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-family: var(--font-display); font-style: italic; font-size: 1rem; }
+
+    /* ABOUT */
+    .about-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 400px 1fr; gap: 80px; align-items: start; }
+    .about-photo { position: relative; }
+    .about-photo-frame { width: 100%; aspect-ratio: 3/4; background: var(--gray-light); overflow: hidden; }
+    .about-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+    .about-photo-accent { position: absolute; bottom: -16px; left: -16px; width: 80px; height: 80px; border: 2px solid var(--gold); }
+    .about-content h3 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: var(--navy); margin-bottom: 20px; line-height: 1.2; }
+    .about-content p { color: var(--gray-text); line-height: 1.8; margin-bottom: 16px; font-size: 0.97rem; }
+    .about-skills { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .skill-tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); border: 1px solid var(--gray-mid); padding: 6px 14px; font-weight: 500; }
+
+    /* CONTACT */
+    .contact-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-info h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; color: var(--navy); margin-bottom: 16px; }
+    .contact-info p { color: var(--gray-text); line-height: 1.8; margin-bottom: 32px; }
+    .contact-detail { display: flex; flex-direction: column; gap: 16px; }
+    .contact-item { display: flex; align-items: center; gap: 12px; }
+    .contact-icon { width: 36px; height: 36px; border: 1px solid var(--gray-mid); display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 1rem; flex-shrink: 0; }
+    .contact-item-text { font-size: 0.9rem; color: var(--gray-text); }
+    .contact-item-text a { color: var(--navy); text-decoration: none; }
+    .contact-item-text a:hover { color: var(--gold); }
+    .social-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+    .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--gray-mid); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; transition: all var(--transition); }
+    .social-link:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-group label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
+    .form-group input, .form-group textarea, .form-group select { border: 1px solid var(--gray-mid); padding: 12px 16px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color var(--transition); resize: vertical; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--navy); }
+    .form-group textarea { min-height: 140px; }
+    .form-note { font-size: 0.78rem; color: var(--gray-text); font-style: italic; }
+
+    /* FOOTER */
+    footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 48px 40px; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .footer-logo { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; color: var(--white); line-height: 1.2; }
+    .footer-logo span { display: block; font-weight: 300; font-size: 0.7rem; font-family: var(--font-body); letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-top: 3px; }
+    footer p { font-size: 0.78rem; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; transition: color var(--transition); }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .page.active .hero-text { animation: fadeUp 0.7s ease both; }
+    .page.active .hero-photo-grid { animation: fadeUp 0.7s 0.15s ease both; }
+    .page.active .section-header { animation: fadeUp 0.6s ease both; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .hero { grid-template-columns: 1fr; padding: 40px 24px 60px; gap: 40px; min-height: auto; }
+      .hero-photo-grid { grid-template-columns: 1fr 1fr; }
+      .section-header { padding: 60px 24px 36px; }
+      .card-grid { padding: 0 24px 60px; grid-template-columns: 1fr; }
+      .masonry-grid { padding: 0 24px 60px; columns: 2; }
+      .about-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 40px; }
+      .about-photo-frame { aspect-ratio: 4/3; }
+      .contact-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 48px; }
+      .home-sections-inner { padding: 0 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 600px) {
+      .hero-photo-grid { grid-template-columns: 1fr 1fr; }
+      .masonry-grid { columns: 1; }
+      .services-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <!-- ↓ EDIT: Your name in the nav bar -->
+  <div class="nav-logo" onclick="showPage('home')">
+    Marc Glass
+    <!-- ↓ EDIT: tagline below your name -->
+    <span>Strategic Communications &amp; Photography</span>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- FULL-SCREEN OVERLAY MENU -->
+<div class="overlay-menu" id="overlayMenu">
+  <a href="#" onclick="showPage('home');closeMenu()">Home</a>
+  <a href="#" onclick="showPage('writing');closeMenu()">Writing &amp; Articles</a>
+  <a href="#" onclick="showPage('photography');closeMenu()">Photography</a>
+  <a href="#" onclick="showPage('social');closeMenu()">Social &amp; Email Marketing</a>
+  <a href="#" onclick="showPage('infographics');closeMenu()">Infographics</a>
+  <a href="#" onclick="showPage('webcontent');closeMenu()">Web Content</a>
+  <a href="#" onclick="showPage('publicity');closeMenu()">Publicity</a>
+  <div class="overlay-divider"></div>
+  <a href="#" onclick="showPage('about');closeMenu()">About</a>
+  <a href="#" onclick="showPage('contact');closeMenu()">Contact</a>
+</div>
+
+<!-- ══ HOME ══ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-text">
+      <!-- ↓ EDIT: headline — wrap words in <em> for italic gold -->
+      <h1>Telling stories that <em>matter.</em></h1>
+      <!-- ↓ EDIT: tagline paragraph -->
+      <p>Award-winning writer, photographer, and communications strategist with decades of experience crafting compelling narratives across print, digital, and social media platforms.</p>
+      <div class="hero-cta">
+        <!-- ↓ EDIT: button label -->
+        <a class="btn btn-primary" href="#" onclick="showPage('writing')">See Portfolio</a>
+      </div>
+    </div>
+
+    <!--
+      HERO PHOTO GRID — 6 horizontal thumbnails (3 columns × 2 rows)
+      ↓ HOW TO ADD YOUR PHOTOS:
+        Replace each:  <div class="hero-thumb-ph">Photo N</div>
+        with:          <img src="photos/your-image.jpg" alt="Brief description" />
+        Keep the .hero-thumb-overlay div as-is beneath the img tag.
+    -->
+    <div class="hero-photo-grid">
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 1</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 2</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 3</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 4</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 5</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+      <div class="hero-thumb" onclick="showPage('photography')">
+        <div class="hero-thumb-ph">Photo 6</div>
+        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-sections">
+    <div class="home-sections-inner">
+      <!-- ↓ EDIT: section label and heading -->
+      <p class="eyebrow">What I Do</p>
+      <h2>A Full-Spectrum Portfolio</h2>
+      <div class="services-grid">
+        <div class="service-card" onclick="showPage('writing')">
+          <div class="service-num">01</div>
+          <!-- ↓ EDIT: tile title and description -->
+          <div class="service-title">Writing &amp; Articles</div>
+          <div class="service-desc">Long-form journalism, feature writing, and editorial content for leading publications.</div>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-card" onclick="showPage('photography')">
+          <div class="service-num">02</div>
+          <div class="service-title">Photography</div>
+          <div class="service-desc">Documentary, portrait, and editorial photography with a distinctive eye for narrative.</div>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-card" onclick="showPage('social')">
+          <div class="service-num">03</div>
+          <div class="service-title">Social &amp; Email Marketing</div>
+          <div class="service-desc">Strategic social media campaigns and email marketing that builds lasting audience relationships.</div>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-card" onclick="showPage('infographics')">
+          <div class="service-num">04</div>
+          <div class="service-title">Infographics</div>
+          <div class="service-desc">Data visualization and infographic design that transforms complex information into clear visuals.</div>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-card" onclick="showPage('webcontent')">
+          <div class="service-num">05</div>
+          <div class="service-title">Web Content</div>
+          <div class="service-desc">SEO-optimized web copy, landing pages, and digital content strategy that converts.</div>
+          <span class="service-arrow">→</span>
+        </div>
+        <div class="service-card" onclick="showPage('publicity')">
+          <div class="service-num">06</div>
+          <div class="service-title">Publicity</div>
+          <div class="service-desc">Press releases, media pitches, and public relations strategy that earns meaningful coverage.</div>
+          <span class="service-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div>
+      <div class="footer-links">
+        <a href="#" onclick="showPage('about')">About</a>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+        <!-- ↓ EDIT: your email address -->
+        <a href="/cdn-cgi/l/email-protection#d8b5b9aabb98b5b9aabbbfb4b9ababf6bbb7b5"><span class="__cf_email__" data-cfemail="b6dbd7c4d5f6dbd7c4d5d1dad7c5c598d5d9db">[email&#160;protected]</span></a>
+      </div>
+      <p>&copy; 2025 Marc Glass. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ WRITING ══
+  ↓ EDIT each card: card-meta, card-title, card-excerpt, and the href on card-link
+-->
+<div class="page" id="page-writing">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Writing &amp; Articles</h2>
+    <!-- ↓ EDIT: page description -->
+    <p>A selection of published work spanning feature journalism, investigative reporting, and editorial commentary across leading regional and national publications.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-thumb">
+        <!-- ↓ REPLACE placeholder with: <img src="photos/article1.jpg" alt="Article title" /> -->
+        <div class="card-thumb-placeholder">Thumbnail</div>
+      </div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2024</div><!-- ↓ EDIT -->
+        <div class="card-title">Article Title Goes Here</div><!-- ↓ EDIT -->
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div><!-- ↓ EDIT -->
+        <a href="#" class="card-link" target="_blank">Read Article</a><!-- ↓ EDIT href -->
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2024</div>
+        <div class="card-title">Second Article Title Here</div>
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
+        <a href="#" class="card-link" target="_blank">Read Article</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2023</div>
+        <div class="card-title">Third Article Title Here</div>
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
+        <a href="#" class="card-link" target="_blank">Read Article</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2023</div>
+        <div class="card-title">Fourth Article Title Here</div>
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
+        <a href="#" class="card-link" target="_blank">Read Article</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2022</div>
+        <div class="card-title">Fifth Article Title Here</div>
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
+        <a href="#" class="card-link" target="_blank">Read Article</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
+      <div class="card-body">
+        <div class="card-meta">Publication Name · 2022</div>
+        <div class="card-title">Sixth Article Title Here</div>
+        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
+        <a href="#" class="card-link" target="_blank">Read Article</a>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ PHOTOGRAPHY ══
+  ↓ HOW TO ADD PHOTOS: Replace each .masonry-placeholder div with:
+    <div class="masonry-item" onclick="openLightbox(this,'Your caption here')">
+      <img src="photos/photo.jpg" alt="Description" />
+      <div class="masonry-item-overlay"><span class="masonry-caption">Caption here</span></div>
+    </div>
+-->
+<div class="page" id="page-photography">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Photography</h2>
+    <!-- ↓ EDIT: page description -->
+    <p>Documentary, portrait, and editorial photography. Click any image to view full size.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="masonry-grid">
+    <div class="masonry-placeholder" style="height:280px">Photo 1</div>
+    <div class="masonry-placeholder" style="height:380px">Photo 2</div>
+    <div class="masonry-placeholder" style="height:220px">Photo 3</div>
+    <div class="masonry-placeholder" style="height:320px">Photo 4</div>
+    <div class="masonry-placeholder" style="height:260px">Photo 5</div>
+    <div class="masonry-placeholder" style="height:420px">Photo 6</div>
+    <div class="masonry-placeholder" style="height:300px">Photo 7</div>
+    <div class="masonry-placeholder" style="height:240px">Photo 8</div>
+    <div class="masonry-placeholder" style="height:360px">Photo 9</div>
+    <div class="masonry-placeholder" style="height:200px">Photo 10</div>
+    <div class="masonry-placeholder" style="height:340px">Photo 11</div>
+    <div class="masonry-placeholder" style="height:290px">Photo 12</div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ SOCIAL MEDIA & EMAIL ══ -->
+<div class="page" id="page-social">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Social Media &amp; Email Marketing</h2>
+    <p>Strategic social media campaigns, content calendars, and email marketing programs that build engaged audiences and drive measurable results.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Social Media Campaign · 2024</div><div class="card-title">Campaign or Project Title Here</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Email Newsletter · 2024</div><div class="card-title">Email Marketing Campaign Title</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Instagram Strategy · 2023</div><div class="card-title">Third Social Project Title</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ INFOGRAPHICS ══ -->
+<div class="page" id="page-infographics">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Infographics</h2>
+    <p>Data visualization and infographic design that transforms complex information into clear, engaging, and shareable visual stories.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2024</div><div class="card-title">Infographic Title Here</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2024</div><div class="card-title">Second Infographic Title</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2023</div><div class="card-title">Third Infographic Title</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ WEB CONTENT ══ -->
+<div class="page" id="page-webcontent">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Web Content</h2>
+    <p>SEO-optimized web copy, landing pages, blog content, and digital content strategy that engages audiences and drives results.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Website Copy · 2024</div><div class="card-title">Web Project Title Here</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Blog Content · 2024</div><div class="card-title">Second Web Content Title</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Landing Page · 2023</div><div class="card-title">Third Web Content Title</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ PUBLICITY ══ -->
+<div class="page" id="page-publicity">
+  <div class="section-header">
+    <p class="eyebrow">Portfolio</p>
+    <h2>Publicity</h2>
+    <p>Press releases, media pitches, and public relations campaigns that earn meaningful media coverage for clients and causes that matter.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="card-grid">
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Press Release · 2024</div><div class="card-title">Publicity Project Title Here</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Media Campaign · 2024</div><div class="card-title">Second Publicity Project</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
+    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">PR Strategy · 2023</div><div class="card-title">Third Publicity Project</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ ABOUT ══
+  ↓ EDIT: h3 tagline, all <p> bio paragraphs, skill tags
+  ↓ PHOTO: replace the inner placeholder div with <img src="photos/headshot.jpg" alt="Marc Glass" />
+-->
+<div class="page" id="page-about">
+  <div class="section-header">
+    <p class="eyebrow">About</p>
+    <h2>Marc Glass</h2>
+    <p>Strategic communications professional, journalist, and photographer based in Maine.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-photo">
+      <div class="about-photo-frame">
+        <!-- ↓ REPLACE with: <img src="photos/headshot.jpg" alt="Marc Glass" /> -->
+        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy),#2d4a7a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.25);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">Your Photo Here</div>
+      </div>
+      <div class="about-photo-accent"></div>
+    </div>
+    <div class="about-content">
+      <!-- ↓ EDIT: your professional headline -->
+      <h3>Writer. Photographer.<br>Communications Strategist.</h3>
+      <!-- ↓ EDIT: replace these paragraphs with your actual bio -->
+      <p>This is where your bio goes. Replace this placeholder text with your own story — your background, your areas of expertise, the publications and clients you've worked with, and what drives your work.</p>
+      <p>You might talk about your journalism career, your photography practice, and how the two disciplines inform each other. Mention notable projects, awards, or recognitions that establish your credibility and voice.</p>
+      <p>A third paragraph might speak to your approach — your philosophy as a storyteller, what you look for in a story, and the kinds of clients or collaborations you're most interested in pursuing.</p>
+      <div class="about-skills">
+        <!-- ↓ EDIT: add, remove, or rename these skill tags -->
+        <span class="skill-tag">Feature Writing</span>
+        <span class="skill-tag">Investigative Reporting</span>
+        <span class="skill-tag">Documentary Photography</span>
+        <span class="skill-tag">Editorial Photography</span>
+        <span class="skill-tag">Social Media Strategy</span>
+        <span class="skill-tag">Email Marketing</span>
+        <span class="skill-tag">Infographic Design</span>
+        <span class="skill-tag">Web Content</span>
+        <span class="skill-tag">Press Relations</span>
+        <span class="skill-tag">Media Pitching</span>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- ══ CONTACT ══
+  ↓ EDIT: email, location, social link URLs
+  ↓ FORMSPREE: sign up free at formspree.io — replace YOUR_FORM_ID below
+-->
+<div class="page" id="page-contact">
+  <div class="section-header">
+    <p class="eyebrow">Get In Touch</p>
+    <h2>Contact</h2>
+    <p>Available for freelance writing, photography assignments, communications consulting, and speaking engagements.</p>
+    <div class="divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h3>Let's work together.</h3>
+      <p>Whether you're looking for a writer, photographer, or communications strategist, I'd love to hear about your project. Fill out the form or reach out directly.</p>
+      <div class="contact-detail">
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <!-- ↓ EDIT: your email (update both the href and the visible text) -->
+          <div class="contact-item-text"><a href="/cdn-cgi/l/email-protection#87eae6f5e4c7eae6f5e4e0ebe6f4f4a9e4e8ea"><span class="__cf_email__" data-cfemail="1d707c6f7e5d707c6f7e7a717c6e6e337e7270">[email&#160;protected]</span></a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">🌐</div>
+          <div class="contact-item-text"><a href="https://marcglass.com" target="_blank">marcglass.com</a></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <!-- ↓ EDIT: your location -->
+          <div class="contact-item-text">Maine, USA</div>
+        </div>
+      </div>
+      <!-- ↓ EDIT: replace # with your real social media URLs -->
+      <div class="social-links">
+        <a href="#" class="social-link" target="_blank">LinkedIn</a>
+        <a href="#" class="social-link" target="_blank">Instagram</a>
+        <a href="#" class="social-link" target="_blank">Twitter / X</a>
+      </div>
+    </div>
+    <div>
+      <!-- ↓ EDIT: replace YOUR_FORM_ID once you sign up at formspree.io -->
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your full name" required /></div>
+        <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
+        <div class="form-group">
+          <label for="subject">Inquiry Type</label>
+          <select id="subject" name="subject">
+            <option value="">Select an inquiry type…</option>
+            <option>Writing Assignment</option>
+            <option>Photography Project</option>
+            <option>Social Media / Email Marketing</option>
+            <option>Infographics</option>
+            <option>Web Content</option>
+            <option>Publicity / PR</option>
+            <option>General Inquiry</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea></div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
+        <p class="form-note">I typically respond within 1–2 business days.</p>
+      </form>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('about')">About</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightboxImg" src="" alt="" />
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  function toggleMenu() {
+    const menu = document.getElementById('overlayMenu');
+    const btn  = document.getElementById('hamburger');
+    const isOpen = menu.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('overlayMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function openLightbox(el, caption) {
+    const img = el.querySelector('img');
+    const lbImg = document.getElementById('lightboxImg');
+    if (img) { lbImg.src = img.src; lbImg.style.display = 'block'; }
+    else { lbImg.style.display = 'none'; }
+    document.getElementById('lightboxCaption').textContent = caption || '';
+    docume

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Manager — Marc Glass Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #1a2b4a; --gold: #c9a84c; --white: #fff;
+      --off: #f8f7f4; --gray-l: #f0eeea; --gray-m: #d0ccc4;
+      --gray-t: #888076; --text: #1e1e1e;
+      --green: #2d7a4f; --red: #b03a2e;
+      --font-d: 'Cormorant Garamond', Georgia, serif;
+      --font-b: 'DM Sans', sans-serif;
+    }
+    body { font-family: var(--font-b); background: var(--off); color: var(--text); font-size: 15px; min-height: 100vh; }
+
+    /* HEADER */
+    header { background: var(--navy); padding: 0 40px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .header-logo { font-family: var(--font-d); font-size: 1.1rem; font-weight: 600; color: var(--white); }
+    .header-logo span { font-size: 0.7rem; font-family: var(--font-b); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); display: block; margin-top: 2px; }
+    .header-back { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+    .header-back:hover { color: var(--gold); }
+
+    /* LAYOUT */
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 32px; }
+    h1 { font-family: var(--font-d); font-size: 2rem; font-weight: 300; color: var(--navy); margin-bottom: 6px; }
+    .subtitle { font-size: 0.9rem; color: var(--gray-t); margin-bottom: 36px; }
+
+    /* TABS */
+    .tabs { display: flex; gap: 0; margin-bottom: 32px; border-bottom: 2px solid var(--gray-l); }
+    .tab { padding: 10px 24px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border: none; background: none; color: var(--gray-t); border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.2s; }
+    .tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+    .tab:hover:not(.active) { color: var(--navy); }
+
+    /* SECTION */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* UPLOAD ZONE */
+    .upload-zone { border: 2px dashed var(--gray-m); background: var(--white); padding: 48px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 32px; position: relative; }
+    .upload-zone:hover, .upload-zone.dragover { border-color: var(--navy); background: #f0f4f8; }
+    .upload-zone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .upload-icon { font-size: 2.5rem; margin-bottom: 12px; line-height: 1; }
+    .upload-zone h3 { font-family: var(--font-d); font-size: 1.4rem; font-weight: 300; color: var(--navy); margin-bottom: 6px; }
+    .upload-zone p { font-size: 0.85rem; color: var(--gray-t); }
+    .upload-zone .formats { font-size: 0.75rem; color: var(--gray-m); margin-top: 8px; }
+
+    /* GALLERY GRID */
+    .gallery-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .gallery-header h2 { font-family: var(--font-d); font-size: 1.3rem; font-weight: 300; color: var(--navy); }
+    .gallery-count { font-size: 0.8rem; color: var(--gray-t); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .photo-card { background: var(--white); border: 1px solid var(--gray-l); position: relative; }
+    .photo-card.selected { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+    .photo-thumb { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: var(--gray-l); }
+    .photo-thumb-placeholder { width: 100%; aspect-ratio: 4/3; background: linear-gradient(135deg, var(--gray-l), var(--gray-m)); display: flex; align-items: center; justify-content: center; color: var(--gray-t); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .photo-info { padding: 10px 12px; }
+    .photo-name { font-size: 0.78rem; font-weight: 500; color: var(--navy); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+    .photo-caption-input { width: 100%; border: 1px solid var(--gray-l); padding: 5px 8px; font-family: var(--font-b); font-size: 0.78rem; color: var(--text); outline: none; transition: border-color 0.2s; }
+    .photo-caption-input:focus { border-color: var(--navy); }
+    .photo-caption-input::placeholder { color: var(--gray-m); }
+    .photo-actions { display: flex; gap: 6px; margin-top: 8px; }
+    .btn-sm { padding: 4px 10px; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--gray-m); background: var(--white); color: var(--navy); cursor: pointer; transition: all 0.2s; }
+    .btn-sm:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .btn-sm.danger:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+    .select-badge { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; background: var(--gold); display: flex; align-items: center; justify-content: center; color: var(--white); font-size: 0.75rem; font-weight: 600; display: none; }
+    .photo-card.selected .select-badge { display: flex; }
+
+    /* SECTION ASSIGNMENT */
+    .assign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+    .assign-card { background: var(--white); border: 1px solid var(--gray-l); padding: 20px; }
+    .assign-card h3 { font-family: var(--font-d); font-size: 1.1rem; font-weight: 400; color: var(--navy); margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--gray-l); }
+    .assign-drop { min-height: 100px; border: 2px dashed var(--gray-m); padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; transition: border-color 0.2s; }
+    .assign-drop.dragover { border-color: var(--gold); background: #fdf8f0; }
+    .assign-thumb { width: 60px; height: 45px; object-fit: cover; border: 1px solid var(--gray-l); position: relative; cursor: pointer; }
+    .assign-thumb-ph { width: 60px; height: 45px; background: var(--gray-l); border: 1px solid var(--gray-m); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--gray-t); text-transform: uppercase; letter-spacing: 0.08em; }
+    .assign-empty { font-size: 0.78rem; color: var(--gray-m); font-style: italic; align-self: center; width: 100%; text-align: center; }
+
+    /* CODE OUTPUT */
+    .code-panel { background: var(--navy); border-radius: 0; padding: 24px; margin-bottom: 32px; }
+    .code-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .code-panel-header h3 { font-family: var(--font-d); font-size: 1.1rem; font-weight: 300; color: var(--white); }
+    .code-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+    .code-block { background: rgba(0,0,0,0.3); padding: 16px; overflow-x: auto; }
+    .code-block code { font-family: 'Courier New', monospace; font-size: 0.78rem; color: #a8d8a8; line-height: 1.7; white-space: pre; }
+    .btn-copy { padding: 8px 18px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; background: var(--gold); color: var(--navy); border: none; cursor: pointer; transition: background 0.2s; }
+    .btn-copy:hover { background: #e0c060; }
+    .btn-copy.copied { background: var(--green); color: var(--white); }
+
+    /* INSTRUCTIONS ACCORDION */
+    .accordion { margin-bottom: 32px; }
+    .accordion-item { border: 1px solid var(--gray-l); background: var(--white); margin-bottom: 2px; }
+    .accordion-header { padding: 16px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .accordion-header h3 { font-size: 0.88rem; font-weight: 500; color: var(--navy); }
+    .accordion-arrow { font-size: 1rem; color: var(--gold); transition: transform 0.3s; }
+    .accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+    .accordion-body { display: none; padding: 0 20px 20px; font-size: 0.85rem; color: var(--gray-t); line-height: 1.8; }
+    .accordion-item.open .accordion-body { display: block; }
+    .accordion-body ol, .accordion-body ul { padding-left: 20px; margin-top: 8px; }
+    .accordion-body li { margin-bottom: 6px; }
+    .accordion-body code { background: var(--gray-l); padding: 2px 6px; font-family: monospace; font-size: 0.82rem; color: var(--navy); }
+    .accordion-body a { color: var(--navy); }
+
+    /* STEP BADGE */
+    .step { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background: var(--navy); color: var(--white); font-size: 0.7rem; font-weight: 600; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
+
+    /* NOTICE */
+    .notice { background: #f0f6ff; border-left: 3px solid var(--navy); padding: 14px 18px; font-size: 0.85rem; color: var(--navy); margin-bottom: 24px; line-height: 1.7; }
+    .notice strong { font-weight: 500; }
+
+    /* BUTTONS */
+    .btn { display: inline-block; padding: 11px 24px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; border: none; transition: all 0.2s; text-decoration: none; }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--gold); color: var(--navy); }
+    .btn-secondary { background: var(--white); color: var(--navy); border: 1px solid var(--gray-m); }
+    .btn-secondary:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: #e0c060; }
+
+    /* EMPTY STATE */
+    .empty-state { text-align: center; padding: 48px; color: var(--gray-t); }
+    .empty-state p { font-size: 0.9rem; }
+
+    /* SIZE TAG */
+    .size-tag { font-size: 0.65rem; color: var(--gray-t); }
+
+    /* HERO GRID PREVIEW */
+    .hero-preview { background: var(--white); border: 1px solid var(--gray-l); padding: 20px; margin-bottom: 32px; }
+    .hero-preview h3 { font-family: var(--font-d); font-size: 1.1rem; font-weight: 300; color: var(--navy); margin-bottom: 14px; }
+    .hero-thumb-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .hero-slot { aspect-ratio: 16/10; background: var(--gray-l); border: 2px dashed var(--gray-m); display: flex; align-items: center; justify-content: center; font-size: 0.68rem; color: var(--gray-t); text-transform: uppercase; letter-spacing: 0.08em; cursor: pointer; position: relative; overflow: hidden; transition: border-color 0.2s; }
+    .hero-slot:hover { border-color: var(--gold); }
+    .hero-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .hero-slot .slot-label { position: relative; z-index: 1; background: rgba(255,255,255,0.85); padding: 2px 6px; font-size: 0.62rem; }
+
+    @media (max-width: 700px) {
+      .container { padding: 24px 16px; }
+      header { padding: 0 16px; }
+      .assign-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">
+    Photo Manager
+    <span>Marc Glass Portfolio</span>
+  </div>
+  <a href="index.html" class="header-back">← Back to Site</a>
+</header>
+
+<div class="container">
+  <h1>Photo Manager</h1>
+  <p class="subtitle">Upload photos, add captions, assign them to sections, and generate ready-to-paste HTML code — no coding required.</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('upload')">Upload &amp; Manage</button>
+    <button class="tab" onclick="switchTab('assign')">Assign to Sections</button>
+    <button class="tab" onclick="switchTab('code')">Get HTML Code</button>
+    <button class="tab" onclick="switchTab('guide')">Setup Guide</button>
+  </div>
+
+  <!-- ══════════════ TAB 1: UPLOAD ══════════════ -->
+  <div class="section active" id="tab-upload">
+
+    <div class="notice">
+      <strong>How this works:</strong> This tool runs entirely in your browser — photos are previewed here but not permanently stored. Use this to organize your photos, add captions, and generate the HTML code to paste into your <code>index.html</code> file. Your actual photo files go in a <code>photos/</code> folder alongside your site files.
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" multiple accept="image/jpeg,image/png,image/webp,image/gif" onchange="handleFiles(this.files)" />
+      <div class="upload-icon">📷</div>
+      <h3>Drop photos here or click to browse</h3>
+      <p>Select multiple photos at once — they'll appear in the gallery below</p>
+      <p class="formats">Supported: JPG, PNG, WEBP · Recommended: 1200px wide or larger for best quality</p>
+    </div>
+
+    <div class="gallery-header">
+      <h2>Your Photos</h2>
+      <span class="gallery-count" id="galleryCount">0 photos</span>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <p>No photos yet — upload some above to get started.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button class="btn btn-secondary" onclick="selectAll()">Select All</button>
+      <button class="btn btn-secondary" onclick="deselectAll()">Deselect All</button>
+      <button class="btn btn-primary" onclick="switchTab('assign')">Assign to Sections →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ TAB 2: ASSIGN ══════════════ -->
+  <div class="section" id="tab-assign">
+
+    <div class="notice">
+      Click a photo in the grid below, then click a section slot to assign it there. Each section shows a preview of which photos are assigned.
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <div class="gallery-header"><h2>All Photos</h2><span class="gallery-count" id="assignCount">0 photos</span></div>
+      <div class="gallery-grid" id="assignGallery">
+        <div class="empty-state" style="grid-column:1/-1"><p>Upload photos in the first tab to assign them.</p></div>
+      </div>
+    </div>
+
+    <h2 style="font-family:var(--font-d);font-size:1.3rem;font-weight:300;color:var(--navy);margin-bottom:16px;">Hero Home Page Grid (6 photos)</h2>
+    <div class="hero-preview">
+      <h3>Preview — 3 × 2 horizontal grid</h3>
+      <div class="hero-thumb-grid" id="heroPreviewGrid">
+        <div class="hero-slot" onclick="assignToHero(0)"><span class="slot-label">Slot 1 — click to assign</span></div>
+        <div class="hero-slot" onclick="assignToHero(1)"><span class="slot-label">Slot 2 — click to assign</span></div>
+        <div class="hero-slot" onclick="assignToHero(2)"><span class="slot-label">Slot 3 — click to assign</span></div>
+        <div class="hero-slot" onclick="assignToHero(3)"><span class="slot-label">Slot 4 — click to assign</span></div>
+        <div class="hero-slot" onclick="assignToHero(4)"><span class="slot-label">Slot 5 — click to assign</span></div>
+        <div class="hero-slot" onclick="assignToHero(5)"><span class="slot-label">Slot 6 — click to assign</span></div>
+      </div>
+    </div>
+
+    <h2 style="font-family:var(--font-d);font-size:1.3rem;font-weight:300;color:var(--navy);margin-bottom:16px;">Photography Gallery</h2>
+    <div class="assign-grid" id="sectionGrid">
+      <!-- built dynamically -->
+    </div>
+
+    <button class="btn btn-primary" onclick="switchTab('code')">Generate Code →</button>
+  </div>
+
+  <!-- ══════════════ TAB 3: CODE ══════════════ -->
+  <div class="section" id="tab-code">
+
+    <div class="notice">
+      Copy the code snippets below and paste them into the matching sections of your <code>index.html</code> file. Each snippet has instructions showing exactly where to paste it.
+    </div>
+
+    <!-- Hero Grid Code -->
+    <div class="code-panel">
+      <div class="code-panel-header">
+        <h3>Hero Photo Grid (Home Page)</h3>
+        <button class="btn-copy" id="copyHeroBtn" onclick="copyCode('heroCode','copyHeroBtn')">Copy Code</button>
+      </div>
+      <p class="code-label" style="margin-bottom:12px;">Paste this inside the &lt;div class="hero-photo-grid"&gt; block in index.html</p>
+      <div class="code-block"><code id="heroCode"><!-- Upload photos and assign them to hero slots to generate code --></code></div>
+    </div>
+
+    <!-- Photography Page Code -->
+    <div class="code-panel">
+      <div class="code-panel-header">
+        <h3>Photography Page (Masonry Grid)</h3>
+        <button class="btn-copy" id="copyPhotoBtn" onclick="copyCode('photoCode','copyPhotoBtn')">Copy Code</button>
+      </div>
+      <p class="code-label" style="margin-bottom:12px;">Paste this inside the &lt;div class="masonry-grid"&gt; block in index.html, replacing the placeholder divs</p>
+      <div class="code-block"><code id="photoCode"><!-- Assign photos to the Photography section to generate code --></code></div>
+    </div>
+
+    <!-- Article Thumbnails Code -->
+    <div class="code-panel">
+      <div class="code-panel-header">
+        <h3>Article / Project Thumbnails</h3>
+        <button class="btn-copy" id="copyArticleBtn" onclick="copyCode('articleCode','copyArticleBtn')">Copy Code</button>
+      </div>
+      <p class="code-label" style="margin-bottom:12px;">Use this pattern for any card thumbnail. Replace the placeholder div inside .card-thumb</p>
+      <div class="code-block"><code id="articleCode">&lt;!-- Inside any .card-thumb div, replace the placeholder with: --&gt;
+&lt;img src="photos/your-image.jpg" alt="Brief description of the image" /&gt;
+
+&lt;!-- Example for a Writing card: --&gt;
+&lt;div class="card-thumb"&gt;
+  &lt;img src="photos/article-mainstreet.jpg" alt="Main Street renovation project" /&gt;
+&lt;/div&gt;</code></div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;">
+      <button class="btn btn-gold" onclick="generateAllCode()">↻ Regenerate All Code</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ TAB 4: GUIDE ══════════════ -->
+  <div class="section" id="tab-guide">
+
+    <h2 style="font-family:var(--font-d);font-size:1.5rem;font-weight:300;color:var(--navy);margin-bottom:24px;">Setup &amp; Publishing Guide</h2>
+
+    <div class="accordion">
+
+      <div class="accordion-item open">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">1</span>Organize your files on your computer</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <p>Create a folder on your computer for your site. Inside it, you need:</p>
+          <ul>
+            <li><code>index.html</code> — your main site file (downloaded from Claude)</li>
+            <li><code>photo-admin.html</code> — this tool</li>
+            <li><code>photos/</code> — a folder where all your images go</li>
+          </ul>
+          <p style="margin-top:10px;">When you reference a photo in the code, use the path <code>photos/filename.jpg</code> — for example: <code>src="photos/sunset-portland.jpg"</code></p>
+          <p style="margin-top:10px;"><strong>Photo tips:</strong> Rename your files with simple, lowercase names (no spaces — use hyphens instead). Example: <code>maine-harbor-2024.jpg</code> not <code>My Photo (1).jpg</code>.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">2</span>Create a free GitHub account and repository</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <ol>
+            <li>Go to <a href="https://github.com" target="_blank">github.com</a> and create a free account if you don't have one.</li>
+            <li>Click the green <strong>New</strong> button to create a new repository.</li>
+            <li>Name it <code>marcglass.com</code> (or any name you like).</li>
+            <li>Set it to <strong>Public</strong> and check <strong>Add a README file</strong>.</li>
+            <li>Click <strong>Create repository</strong>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">3</span>Upload your files to GitHub</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <p>The easiest way — no command line needed:</p>
+          <ol>
+            <li>Open your repository on GitHub.</li>
+            <li>Click <strong>Add file → Upload files</strong>.</li>
+            <li>Drag your <code>index.html</code> and <code>photo-admin.html</code> files into the upload area.</li>
+            <li>Click <strong>Commit changes</strong>.</li>
+            <li>Then create the <code>photos/</code> folder: click <strong>Add file → Create new file</strong>, type <code>photos/.gitkeep</code> in the filename box, and commit. This creates the folder.</li>
+            <li>Go into the <code>photos/</code> folder and upload your images the same way.</li>
+          </ol>
+          <p style="margin-top:10px;">You can also use the free <strong>GitHub Desktop</strong> app for a more drag-and-drop experience: <a href="https://desktop.github.com" target="_blank">desktop.github.com</a></p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">4</span>Turn on GitHub Pages (free hosting)</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <ol>
+            <li>In your GitHub repository, click <strong>Settings</strong> (top menu).</li>
+            <li>Scroll down to <strong>Pages</strong> in the left sidebar.</li>
+            <li>Under <strong>Source</strong>, select <strong>Deploy from a branch</strong>.</li>
+            <li>Choose <strong>main</strong> branch and <strong>/ (root)</strong> folder.</li>
+            <li>Click <strong>Save</strong>.</li>
+            <li>Wait 2–3 minutes. Your site will be live at <code>yourusername.github.io/repositoryname</code>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">5</span>Connect your marcglass.com domain</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <p>You'll do this in two places — GitHub and your domain registrar (GoDaddy, Namecheap, etc.).</p>
+          <p style="margin-top:10px;"><strong>In GitHub Pages settings:</strong></p>
+          <ol>
+            <li>Under Pages → Custom domain, type <code>marcglass.com</code> and click Save.</li>
+            <li>Check the <strong>Enforce HTTPS</strong> box once it appears.</li>
+          </ol>
+          <p style="margin-top:10px;"><strong>At your domain registrar:</strong></p>
+          <ol>
+            <li>Find the DNS settings for marcglass.com.</li>
+            <li>Add these 4 A records pointing to GitHub's servers:<br>
+              <code>185.199.108.153</code><br>
+              <code>185.199.109.153</code><br>
+              <code>185.199.110.153</code><br>
+              <code>185.199.111.153</code>
+            </li>
+            <li>Add a CNAME record: <code>www</code> pointing to <code>yourusername.github.io</code></li>
+          </ol>
+          <p style="margin-top:10px;">DNS changes take 10 minutes to 48 hours to fully propagate. Once done, marcglass.com will load your GitHub Pages site.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">6</span>Updating your site after launch</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <p>Any time you want to update text or add/change photos:</p>
+          <ol>
+            <li>Edit your <code>index.html</code> file locally (or use GitHub's built-in editor — click the file, then the pencil icon).</li>
+            <li>Upload new photos to the <code>photos/</code> folder via <strong>Add file → Upload files</strong>.</li>
+            <li>Use this Photo Manager tool to generate the HTML code for new photos, then paste it into the right spot in <code>index.html</code>.</li>
+            <li>Commit your changes — GitHub Pages automatically rebuilds and publishes within about 60 seconds.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <h3><span class="step">7</span>Set up the contact form (Formspree — free)</h3>
+          <span class="accordion-arrow">▾</span>
+        </div>
+        <div class="accordion-body">
+          <ol>
+            <li>Go to <a href="https://formspree.io" target="_blank">formspree.io</a> and create a free account.</li>
+            <li>Click <strong>New Form</strong>, give it a name (e.g. "Marc Glass Contact"), and enter your email address.</li>
+            <li>Copy the form ID — it looks like <code>xrgpblkn</code>.</li>
+            <li>In <code>index.html</code>, find the line:<br><code>action="https://formspree.io/f/YOUR_FORM_ID"</code></li>
+            <li>Replace <code>YOUR_FORM_ID</code> with your actual ID.</li>
+            <li>That's it! Form submissions go directly to your email, free forever up to 50/month.</li>
+          </ol>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+  // ── STATE ──
+  let photos = [];       // { id, name, dataUrl, caption, size }
+  let heroSlots = new Array(6).fill(null);   // photo ids
+  let photoSection = []; // photo ids for masonry gallery
+  let selectedId = null;
+
+  const SECTIONS = ['Photography Gallery', 'Writing', 'Social & Email', 'Infographics', 'Web Content', 'Publicity'];
+
+  // ── TABS ──
+  function switchTab(id) {
+    document.querySelectorAll('.tab').forEach((t,i) => {
+      const tabs = ['upload','assign','code','guide'];
+      t.classList.toggle('active', tabs[i] === id);
+    });
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    if (id === 'assign') renderAssignTab();
+    if (id === 'code') generateAllCode();
+  }
+
+  // ── FILE HANDLING ──
+  function handleFiles(files) {
+    Array.from(files).forEach(file => {
+      if (!file.type.startsWith('image/')) return;
+      const reader = new FileReader();
+      reader.onload = e => {
+        const id = Date.now() + Math.random();
+        photos.push({ id, name: file.name, dataUrl: e.target.result, caption: '', size: file.size });
+        renderGallery();
+        updateCounts();
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Drag and drop on upload zone
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+  zone.addEventListener('drop', e => { e.preventDefault(); zone.classList.remove('dragover'); handleFiles(e.dataTransfer.files); });
+
+  // ── GALLERY ──
+  function renderGallery() {
+    const grid = document.getElementById('galleryGrid');
+    if (photos.length === 0) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><p>No photos yet — upload some above to get started.</p></div>';
+      return;
+    }
+    grid.innerHTML = photos.map(p => `
+      <div class="photo-card ${p.id === selectedId ? 'selected' : ''}" id="card-${p.id}">
+        <div class="select-badge">✓</div>
+        <img class="photo-thumb" src="${p.dataUrl}" alt="${p.name}" loading="lazy" />
+        <div class="photo-info">
+          <div class="photo-name" title="${p.name}">${p.name}</div>
+          <div class="size-tag">${formatSize(p.size)}</div>
+          <input class="photo-caption-input" type="text" placeholder="Add caption (optional)…"
+            value="${p.caption}"
+            oninput="updateCaption(${p.id}, this.value)"
+          />
+          <div class="photo-actions">
+            <button class="btn-sm" onclick="selectPhoto(${p.id})">Select</button>
+            <button class="btn-sm danger" onclick="deletePhoto(${p.id})">Remove</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function updateCaption(id, val) {
+    const p = photos.find(p => p.id === id);
+    if (p) p.caption = val;
+  }
+
+  function deletePhoto(id) {
+    photos = photos.filter(p => p.id !== id);
+    heroSlots = heroSlots.map(s => s === id ? null : s);
+    photoSection = photoSection.filter(s => s !== id);
+    if (selectedId === id) selectedId = null;
+    renderGallery();
+    updateCounts();
+  }
+
+  function selectPhoto(id) {
+    selectedId = (selectedId === id) ? null : id;
+    renderGallery();
+  }
+
+  function selectAll() { selectedId = photos.length > 0 ? photos[0].id : null; renderGallery(); }
+  function deselectAll() { selectedId = null; renderGallery(); }
+
+  function updateCounts() {
+    document.getElementById('galleryCount').textContent = photos.length + ' photo' + (photos.length !== 1 ? 's' : '');
+    const ac = document.getElementById('assignCount');
+    if (ac) ac.textContent = photos.length + ' photo' + (photos.length !== 1 ? 's' : '');
+  }
+
+  function formatSize(bytes) {
+    if (bytes > 1048576) return (bytes/1048576).toFixed(1) + ' MB';
+    return (bytes/1024).toFixed(0) + ' KB';
+  }
+
+  // ── ASSIGN TAB ──
+  function renderAssignTab() {
+    const grid = document.getElementById('assignGallery');
+    const ac = document.getElementById('assignCount');
+    ac.textContent = photos.length + ' photo' + (photos.length !== 1 ? 's' : '');
+
+    if (photos.length === 0) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><p>Upload photos in the first tab to assign them.</p></div>';
+    } else {
+      grid.innerHTML = photos.map(p => `
+        <div class="photo-card ${p.id === selectedId ? 'selected' : ''}" onclick="selectPhoto(${p.id});renderAssignTab();" style="cursor:pointer;">
+          <div class="select-badge">✓</div>
+          <img class="photo-thumb" src="${p.dataUrl}" alt="${p.name}" loading="lazy" />
+          <div class="photo-info">
+            <div class="photo-name">${p.name}</div>
+            <div class="photo-actions">
+              <button class="btn-sm" onclick="event.stopPropagation();addToPhotoSection(${p.id})">+ Gallery</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // hero preview
+    const heroGrid = document.getElementById('heroPreviewGrid');
+    heroGrid.innerHTML = heroSlots.map((slotId, i) => {
+      const p = slotId ? photos.find(ph => ph.id === slotId) : null;
+      return `<div class="hero-slot" onclick="assignToHero(${i})">
+        ${p ? `<img src="${p.dataUrl}" alt="${p.name}" />` : ''}
+        <span class="slot-label">${p ? p.name : 'Slot ' + (i+1) + ' — click'}</span>
+      </div>`;
+    }).join('');
+
+    // photography section
+    const secGrid = document.getElementById('sectionGrid');
+    const inGallery = photoSection.map(id => photos.find(p => p.id === id)).filter(Boolean);
+    secGrid.innerHTML = `
+      <div class="assign-card" style="grid-column:1/-1">
+        <h3>Photography Gallery (${inGallery.length} photos assigned)</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+          ${inGallery.length === 0
+            ? '<span style="font-size:0.8rem;color:var(--gray-m);font-style:italic;">None assigned yet — click "+ Gallery" on a photo above</span>'
+            : inGallery.map(p => `
+              <div style="position:relative;cursor:pointer;" title="Click to remove" onclick="removeFromPhotoSection(${p.id})">
+                <img src="${p.dataUrl}" style="width:70px;height:52px;object-fit:cover;border:1px solid var(--gray-l);" />
+                <div style="position:absolute;top:2px;right:2px;width:16px;height:16px;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;">×</div>
+              </div>`).join('')
+          }
+        </div>
+      </div>`;
+  }
+
+  function assignToHero(slotIndex) {
+    if (!selectedId) { alert('Click "Select" on a photo first, then click a hero slot.'); return; }
+    heroSlots[slotIndex] = selectedId;
+    renderAssignTab();
+  }
+
+  function addToPhotoSection(id) {
+    if (!photoSection.includes(id)) { photoSection.push(id); }
+    renderAssignTab();
+  }
+
+  function removeFromPhotoSection(id) {
+    photoSection = photoSection.filter(s => s !== id);
+    renderAssignTab();
+  }
+
+  // ── CODE GENERATION ──
+  function generateAllCode() {
+    // Hero grid code
+    const heroLines = heroSlots.map((slotId, i) => {
+      const p = slotId ? photos.find(ph => ph.id === slotId) : null;
+      const src = p ? `photos/${p.name}` : `photos/hero-photo-${i+1}.jpg`;
+      const alt = p ? p.caption || p.name.replace(/\.[^.]+$/,'').replace(/-/g,' ') : `Photo ${i+1}`;
+      const cap = p && p.caption ? p.caption : 'View Photography';
+      return `  <div class="hero-thumb" onclick="showPage('photography')">\n    <img src="${src}" alt="${alt}" />\n    <div class="hero-thumb-overlay"><span class="hero-thumb-label">${cap}</span></div>\n  </div>`;
+    });
+    document.getElementById('heroCode').textContent = heroLines.join('\n');
+
+    // Photography masonry code
+    if (photoSection.length === 0) {
+      document.getElementById('photoCode').textContent = '<!-- No photos assigned to gallery yet -->';
+    } else {
+      const photoLines = photoSection.map(id => {
+        const p = photos.find(ph => ph.id === id);
+        if (!p) return '';
+        const src = `photos/${p.name}`;
+        const alt = p.caption || p.name.replace(/\.[^.]+$/,'').replace(/-/g,' ');
+        const cap = p.caption || '';
+        return `  <div class="masonry-item" onclick="openLightbox(this,'${cap.replace(/'/g,"\\'")}')\">\n    <img src="${src}" alt="${alt}" loading="lazy" />\n    <div class="masonry-item-overlay"><span class="masonry-caption">${cap}</span></div>\n  </div>`;
+      }).filter(Boolean);
+      document.getElementById('photoCode').textContent = photoLines.join('\n');
+    }
+  }
+
+  function copyCode(elementId, btnId) {
+    const text = document.getElementById(elementId).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById(btnId);
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy Code'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // ── ACCORDION ──
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
