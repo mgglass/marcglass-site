@@ -69,13 +69,30 @@
     .hero-text h1 em { font-style: italic; color: var(--gold); }
     .hero-text p { font-size: 1.02rem; color: var(--gray-text); max-width: 400px; line-height: 1.8; margin-bottom: 36px; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn { display: inline-block; padding: 12px 28px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all var(--transition); }
-    .btn-primary { background: var(--navy); color: var(--white); }
-    .btn-primary:hover { background: var(--gold); color: var(--navy); }
-    .btn-outline { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
-    .btn-outline:hover { background: var(--navy); color: var(--white); }
 
-    /* HERO PHOTO GRID — all horizontal (landscape) thumbnails, 3 cols × 2 rows */
+    /* ── BUTTONS (CTA system) ──────────────────────────────────────── */
+    .btn { display: inline-block; padding: 12px 28px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all var(--transition); font-family: var(--font-body); }
+    .btn-primary   { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--gold); color: var(--navy); }
+    .btn-outline   { background: transparent; color: var(--navy); border: 1px solid var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-gold      { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--navy); color: var(--white); }
+    .btn-ghost     { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.5); }
+    .btn-ghost:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
+    /* CTA Banner — full-width call-to-action block */
+    .cta-banner { background: var(--navy); padding: 72px 40px; text-align: center; }
+    .cta-banner.cta-gold { background: var(--gold); }
+    .cta-banner.cta-light { background: var(--off-white); }
+    .cta-banner h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--white); margin-bottom: 12px; }
+    .cta-banner.cta-gold h2 { color: var(--navy); }
+    .cta-banner.cta-light h2 { color: var(--navy); }
+    .cta-banner p { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+    .cta-banner.cta-gold p { color: rgba(26,43,74,0.7); }
+    .cta-banner.cta-light p { color: var(--gray-text); }
+    .cta-banner .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* HERO PHOTO GRID */
     .hero-photo-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 8px; width: 100%; }
     .hero-thumb { overflow: hidden; aspect-ratio: 16/10; background: var(--gray-light); cursor: pointer; position: relative; width: 100%; }
     .hero-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
@@ -87,6 +104,22 @@
     .hero-thumb:hover .hero-thumb-overlay { background: rgba(26,43,74,0.45); }
     .hero-thumb-label { font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--white); opacity: 0; transform: translateY(6px); transition: all var(--transition); }
     .hero-thumb:hover .hero-thumb-label { opacity: 1; transform: translateY(0); }
+
+    /* ── HERO SLIDESHOW (replaces static grid when photos are added) ── */
+    .hero-slideshow { position: relative; width: 100%; overflow: hidden; border-radius: 0; }
+    .slideshow-track { display: flex; transition: transform 0.6s cubic-bezier(0.77,0,0.175,1); will-change: transform; }
+    .slideshow-slide { min-width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; background: var(--gray-light); }
+    .slideshow-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .slideshow-slide-ph { width: 100%; height: 100%; min-height: 320px; background: linear-gradient(135deg, var(--gray-light), var(--gray-mid)); display: flex; align-items: center; justify-content: center; color: var(--gray-text); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; }
+    .slideshow-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(26,43,74,0.7)); padding: 40px 24px 20px; color: var(--white); font-family: var(--font-display); font-style: italic; font-size: 1rem; opacity: 0; transition: opacity 0.4s ease; }
+    .hero-slideshow:hover .slideshow-caption { opacity: 1; }
+    .slideshow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; color: var(--navy); transition: all var(--transition); z-index: 10; }
+    .slideshow-btn:hover { background: var(--gold); color: var(--navy); }
+    .slideshow-btn.prev { left: 16px; }
+    .slideshow-btn.next { right: 16px; }
+    .slideshow-dots { display: flex; gap: 8px; justify-content: center; padding: 14px 0 4px; }
+    .slideshow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gray-mid); border: none; cursor: pointer; transition: all 0.3s ease; padding: 0; }
+    .slideshow-dot.active { background: var(--gold); transform: scale(1.4); }
 
     /* HOME SERVICES */
     .home-sections { background: var(--off-white); padding: 80px 0; }
@@ -147,6 +180,26 @@
     .lightbox-close:hover { opacity: 1; }
     .lightbox-caption { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-family: var(--font-display); font-style: italic; font-size: 1rem; }
 
+    /* ── ACCORDION ─────────────────────────────────────────────────── */
+    .accordion { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; }
+    .accordion-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
+    .accordion-heading { font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--navy); margin-bottom: 32px; }
+    .accordion-item { border-top: 1px solid var(--gray-light); }
+    .accordion-item:last-child { border-bottom: 1px solid var(--gray-light); }
+    .accordion-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 22px 0; background: none; border: none; cursor: pointer; text-align: left; gap: 16px; }
+    .accordion-trigger-text { font-family: var(--font-display); font-size: 1.25rem; font-weight: 400; color: var(--navy); line-height: 1.3; transition: color var(--transition); }
+    .accordion-trigger:hover .accordion-trigger-text { color: var(--gold); }
+    .accordion-icon { width: 28px; height: 28px; border: 1px solid var(--gray-mid); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all var(--transition); position: relative; }
+    .accordion-icon::before, .accordion-icon::after { content: ''; position: absolute; background: var(--navy); border-radius: 2px; transition: all var(--transition); }
+    .accordion-icon::before { width: 10px; height: 1.5px; }
+    .accordion-icon::after  { width: 1.5px; height: 10px; }
+    .accordion-item.open .accordion-icon { background: var(--navy); border-color: var(--navy); }
+    .accordion-item.open .accordion-icon::before { background: var(--white); }
+    .accordion-item.open .accordion-icon::after  { background: var(--white); transform: rotate(90deg) scaleY(0); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
+    .accordion-body-inner { padding: 0 0 24px; font-size: 0.95rem; color: var(--gray-text); line-height: 1.8; max-width: 680px; }
+    .accordion-body-inner p + p { margin-top: 12px; }
+
     /* ABOUT */
     .about-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 400px 1fr; gap: 80px; align-items: start; }
     .about-photo { position: relative; }
@@ -158,7 +211,7 @@
     .about-skills { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
     .skill-tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); border: 1px solid var(--gray-mid); padding: 6px 14px; font-weight: 500; }
 
-    /* CONTACT */
+    /* ── CONTACT FORM (enhanced) ──────────────────────────────────── */
     .contact-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .contact-info h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; color: var(--navy); margin-bottom: 16px; }
     .contact-info p { color: var(--gray-text); line-height: 1.8; margin-bottom: 32px; }
@@ -171,13 +224,37 @@
     .social-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
     .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--gray-mid); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; transition: all var(--transition); }
     .social-link:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+    /* Enhanced form */
+    .contact-form-wrap { background: var(--off-white); padding: 40px; }
+    .contact-form-wrap h4 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; color: var(--navy); margin-bottom: 24px; }
     .contact-form { display: flex; flex-direction: column; gap: 20px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
-    .form-group input, .form-group textarea, .form-group select { border: 1px solid var(--gray-mid); padding: 12px 16px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color var(--transition); resize: vertical; }
-    .form-group input:focus, .form-group textarea:focus { border-color: var(--navy); }
+    .form-group input, .form-group textarea, .form-group select {
+      border: 1px solid var(--gray-mid); padding: 12px 16px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color var(--transition); resize: vertical; appearance: none; -webkit-appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--navy); }
     .form-group textarea { min-height: 140px; }
+    .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888076' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    /* Checkbox group */
+    .form-checkboxes { display: flex; flex-direction: column; gap: 10px; }
+    .form-check { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.88rem; color: var(--gray-text); }
+    .form-check input[type=checkbox] { width: 16px; height: 16px; border: 1px solid var(--gray-mid); background: var(--white); cursor: pointer; accent-color: var(--navy); flex-shrink: 0; }
+    /* File upload */
+    .form-file-label { display: flex; align-items: center; gap: 12px; border: 1px dashed var(--gray-mid); padding: 14px 18px; cursor: pointer; transition: border-color var(--transition); background: var(--white); }
+    .form-file-label:hover { border-color: var(--navy); }
+    .form-file-label span { font-size: 0.82rem; color: var(--gray-text); }
+    .form-file-label strong { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
+    .form-file-label input[type=file] { display: none; }
+    .form-submit-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
     .form-note { font-size: 0.78rem; color: var(--gray-text); font-style: italic; }
+    /* Form success state */
+    .form-success { display: none; text-align: center; padding: 40px 24px; }
+    .form-success.visible { display: block; }
+    .form-success-icon { font-size: 2.4rem; margin-bottom: 16px; }
+    .form-success h4 { font-family: var(--font-display); font-size: 1.6rem; color: var(--navy); margin-bottom: 8px; }
+    .form-success p { font-size: 0.9rem; color: var(--gray-text); }
 
     /* FOOTER */
     footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 48px 40px; }
@@ -193,6 +270,7 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .page.active .hero-text { animation: fadeUp 0.7s ease both; }
     .page.active .hero-photo-grid { animation: fadeUp 0.7s 0.15s ease both; }
+    .page.active .hero-slideshow { animation: fadeUp 0.7s 0.15s ease both; }
     .page.active .section-header { animation: fadeUp 0.6s ease both; }
 
     /* RESPONSIVE */
@@ -208,6 +286,9 @@
       .contact-grid { grid-template-columns: 1fr; padding: 0 24px 60px; gap: 48px; }
       .home-sections-inner { padding: 0 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
+      .accordion { padding: 0 24px 60px; }
+      .cta-banner { padding: 56px 24px; }
+      .form-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 600px) {
       .hero-photo-grid { grid-template-columns: 1fr 1fr; }
@@ -254,13 +335,14 @@
       <!-- ↓ EDIT: tagline paragraph -->
       <p>Award-winning writer, photographer, and communications strategist with decades of experience crafting compelling narratives across print, digital, and social media platforms.</p>
       <div class="hero-cta">
-        <!-- ↓ EDIT: button label -->
+        <!-- ↓ CTA BUTTONS: choose btn-primary, btn-outline, btn-gold, or btn-ghost -->
         <a class="btn btn-primary" href="#" onclick="showPage('writing')">See Portfolio</a>
+        <a class="btn btn-outline" href="#" onclick="showPage('contact')">Get In Touch</a>
       </div>
     </div>
 
     <!--
-      HERO PHOTO GRID — 6 horizontal thumbnails (3 columns × 2 rows)
+      HERO PHOTO GRID — 6 horizontal thumbnails (3 cols × 2 rows)
       ↓ HOW TO ADD YOUR PHOTOS:
         Replace each:  <div class="hero-thumb-ph">Photo N</div>
         with:          <img src="photos/your-image.jpg" alt="Brief description" />
@@ -340,6 +422,21 @@
       </div>
     </div>
   </section>
+
+  <!--
+    ══ HOME CTA BANNER ══
+    ↓ EDIT: headline, subtext, and button labels/destinations.
+    Switch class to cta-gold for a gold background, or cta-light for off-white.
+  -->
+  <section class="cta-banner">
+    <h2>Ready to tell your story?</h2>
+    <p>Available for writing assignments, photography projects, communications consulting, and speaking engagements.</p>
+    <div class="btn-row">
+      <a class="btn btn-gold" href="#" onclick="showPage('contact')">Start a Conversation</a>
+      <a class="btn btn-ghost" href="#" onclick="showPage('about')">Learn More About Me</a>
+    </div>
+  </section>
+
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div>
@@ -347,7 +444,7 @@
         <a href="#" onclick="showPage('about')">About</a>
         <a href="#" onclick="showPage('contact')">Contact</a>
         <!-- ↓ EDIT: your email address -->
-        <a href="/cdn-cgi/l/email-protection#d8b5b9aabb98b5b9aabbbfb4b9ababf6bbb7b5"><span class="__cf_email__" data-cfemail="b6dbd7c4d5f6dbd7c4d5d1dad7c5c598d5d9db">[email&#160;protected]</span></a>
+        <a href="#" onclick="showPage('contact')">Contact Me</a>
       </div>
       <p>&copy; 2025 Marc Glass. All rights reserved.</p>
     </div>
@@ -424,16 +521,23 @@
       </div>
     </div>
   </div>
+
+  <!--
+    ══ WRITING PAGE CTA ══
+    ↓ EDIT: text and button. Switch class to cta-gold or cta-light if preferred.
+  -->
+  <section class="cta-banner cta-light">
+    <h2>Interested in working together?</h2>
+    <p>I'm available for feature writing, investigative reporting, editorial commentary, and content strategy.</p>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#" onclick="showPage('contact')">Discuss a Project</a>
+    </div>
+  </section>
+
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
-<!-- ══ PHOTOGRAPHY ══
-  ↓ HOW TO ADD PHOTOS: Replace each .masonry-placeholder div with:
-    <div class="masonry-item" onclick="openLightbox(this,'Your caption here')">
-      <img src="photos/photo.jpg" alt="Description" />
-      <div class="masonry-item-overlay"><span class="masonry-caption">Caption here</span></div>
-    </div>
--->
+<!-- ══ PHOTOGRAPHY ══ -->
 <div class="page" id="page-photography">
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
@@ -442,7 +546,36 @@
     <p>Documentary, portrait, and editorial photography. Click any image to view full size.</p>
     <div class="divider"></div>
   </div>
-  <div class="masonry-grid">
+
+  <!--
+    ══ PHOTOGRAPHY SLIDESHOW ══
+    This slideshow sits above the full masonry gallery as a featured highlight reel.
+    ↓ HOW TO ADD PHOTOS TO THE SLIDESHOW:
+      Replace each <div class="slideshow-slide-ph">...</div>
+      with: <img src="photos/your-photo.jpg" alt="Caption here" />
+      Update the data-caption attribute on the .slideshow-slide div.
+    ↓ ADD OR REMOVE SLIDES: Copy or delete entire <div class="slideshow-slide"> blocks.
+      The dots and prev/next arrows update automatically.
+  -->
+  <div class="hero-slideshow" id="photoSlideshow" style="max-width:var(--max-w);margin:0 auto 16px;padding:0 40px;">
+    <div class="slideshow-track" id="slideshowTrack">
+      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
+        <div class="slideshow-slide-ph">Featured Photo 1</div>
+        <div class="slideshow-caption" id="slideshowCaption">Featured photograph — add your caption here</div>
+      </div>
+      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
+        <div class="slideshow-slide-ph">Featured Photo 2</div>
+      </div>
+      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
+        <div class="slideshow-slide-ph">Featured Photo 3</div>
+      </div>
+    </div>
+    <button class="slideshow-btn prev" onclick="slideshowMove(-1)" aria-label="Previous">&#8592;</button>
+    <button class="slideshow-btn next" onclick="slideshowMove(1)" aria-label="Next">&#8594;</button>
+  </div>
+  <div class="slideshow-dots" id="slideshowDots"></div>
+
+  <div class="masonry-grid" style="margin-top:32px;">
     <div class="masonry-placeholder" style="height:280px">Photo 1</div>
     <div class="masonry-placeholder" style="height:380px">Photo 2</div>
     <div class="masonry-placeholder" style="height:220px">Photo 3</div>
@@ -564,6 +697,81 @@
       </div>
     </div>
   </div>
+
+  <!--
+    ══ ABOUT PAGE ACCORDION ══
+    Use this section for FAQs, services detail, process steps, or anything
+    you want accessible without cluttering the page.
+    ↓ EDIT: change the heading, label, and each accordion-trigger-text / accordion-body-inner.
+    ↓ ADD an item: copy one full <div class="accordion-item"> block and paste it.
+    ↓ REMOVE an item: delete one full <div class="accordion-item"> block.
+  -->
+  <div class="accordion">
+    <p class="accordion-label">Learn More</p>
+    <h3 class="accordion-heading">Frequently Asked Questions</h3>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">What kinds of writing projects do you take on?</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Replace this with your actual answer. I work on feature journalism, investigative reporting, profiles, essays, and editorial commentary for publications ranging from regional outlets to national magazines. I'm also available for branded content, white papers, and long-form web copy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">Are you available for photography assignments outside Maine?</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Replace this with your actual answer. Yes — I travel for documentary, portrait, and editorial assignments. My home base is Maine, but I've worked throughout New England and beyond. Travel costs are discussed as part of project scoping.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">How does your communications consulting work?</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Replace this with your actual answer. I work with organizations and individuals to develop communications strategies, craft key messages, manage media relationships, and create the written and visual content that brings those strategies to life. Engagements range from one-time projects to ongoing retainer arrangements.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">What is your typical turnaround time?</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Replace this with your actual answer. Turnaround depends on the scope and complexity of the project. For shorter pieces, I can often turn around a first draft within a week. Larger projects are scoped and scheduled individually. I'm happy to discuss your timeline during our initial conversation.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">Do you offer speaking engagements or workshops?</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner">
+          <p>Replace this with your actual answer. Yes. I speak on topics including visual storytelling, narrative journalism, communications strategy, and the intersection of photography and writing. I also lead workshops for journalists, communications professionals, and organizations. Reach out through the contact page to discuss.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /accordion -->
+
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
@@ -585,8 +793,8 @@
       <div class="contact-detail">
         <div class="contact-item">
           <div class="contact-icon">✉</div>
-          <!-- ↓ EDIT: your email (update both the href and the visible text) -->
-          <div class="contact-item-text"><a href="/cdn-cgi/l/email-protection#87eae6f5e4c7eae6f5e4e0ebe6f4f4a9e4e8ea"><span class="__cf_email__" data-cfemail="1d707c6f7e5d707c6f7e7a717c6e6e337e7270">[email&#160;protected]</span></a></div>
+          <!-- ↓ EDIT: your email -->
+          <div class="contact-item-text"><a id="emailLink" href="#">Loading…</a></div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">🌐</div>
@@ -605,28 +813,112 @@
         <a href="#" class="social-link" target="_blank">Twitter / X</a>
       </div>
     </div>
-    <div>
-      <!-- ↓ EDIT: replace YOUR_FORM_ID once you sign up at formspree.io -->
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="form-group"><label for="name">Name</label><input type="text" id="name" name="name" placeholder="Your full name" required /></div>
-        <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
-        <div class="form-group">
-          <label for="subject">Inquiry Type</label>
-          <select id="subject" name="subject">
-            <option value="">Select an inquiry type…</option>
-            <option>Writing Assignment</option>
-            <option>Photography Project</option>
-            <option>Social Media / Email Marketing</option>
-            <option>Infographics</option>
-            <option>Web Content</option>
-            <option>Publicity / PR</option>
-            <option>General Inquiry</option>
-          </select>
+
+    <!--
+      ══ ENHANCED CONTACT FORM ══
+      New features added:
+        • Name + Email on one row (cleaner layout)
+        • "How did you hear about me?" dropdown
+        • Checkboxes for services of interest
+        • Optional file attachment field
+        • Animated success confirmation on submit
+      ↓ FORMSPREE: replace YOUR_FORM_ID after signing up at formspree.io
+      ↓ EDIT: adjust checkbox options to match your services
+    -->
+    <div class="contact-form-wrap">
+      <h4>Send a message</h4>
+      <div id="contactFormContainer">
+        <form class="contact-form" id="contactForm"
+              action="https://formspree.io/f/YOUR_FORM_ID"
+              method="POST"
+              onsubmit="handleFormSubmit(event)">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Inquiry Type</label>
+            <select id="subject" name="subject">
+              <option value="">Select an inquiry type…</option>
+              <option>Writing Assignment</option>
+              <option>Photography Project</option>
+              <option>Social Media / Email Marketing</option>
+              <option>Infographics</option>
+              <option>Web Content</option>
+              <option>Publicity / PR</option>
+              <option>Speaking Engagement</option>
+              <option>General Inquiry</option>
+            </select>
+          </div>
+
+          <!-- ↓ EDIT: rename or add/remove checkbox options -->
+          <div class="form-group">
+            <label>Services of Interest (check all that apply)</label>
+            <div class="form-checkboxes">
+              <label class="form-check"><input type="checkbox" name="services" value="Writing" /> Writing &amp; Journalism</label>
+              <label class="form-check"><input type="checkbox" name="services" value="Photography" /> Photography</label>
+              <label class="form-check"><input type="checkbox" name="services" value="Social" /> Social Media &amp; Email Marketing</label>
+              <label class="form-check"><input type="checkbox" name="services" value="Infographics" /> Infographics &amp; Data Visualization</label>
+              <label class="form-check"><input type="checkbox" name="services" value="PR" /> Publicity &amp; PR</label>
+              <label class="form-check"><input type="checkbox" name="services" value="Speaking" /> Speaking / Workshops</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="heard">How did you hear about me?</label>
+            <select id="heard" name="how_heard">
+              <option value="">Select one…</option>
+              <option>Web search</option>
+              <option>Referral from a colleague</option>
+              <option>LinkedIn</option>
+              <option>Instagram</option>
+              <option>Published article or byline</option>
+              <option>Speaking engagement</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Tell me about your project — the more detail, the better." required></textarea>
+          </div>
+
+          <!-- ↓ Optional file attachment — remove this block if you don't need it -->
+          <div class="form-group">
+            <label>Attach a brief or reference document (optional)</label>
+            <label class="form-file-label">
+              <span>📎</span>
+              <div>
+                <strong>Choose File</strong>
+                <span id="fileNameDisplay"> — no file selected</span>
+              </div>
+              <input type="file" name="attachment" accept=".pdf,.doc,.docx,.txt,.jpg,.png"
+                     onchange="document.getElementById('fileNameDisplay').textContent = ' — ' + (this.files[0]?.name || 'no file selected')" />
+            </label>
+          </div>
+
+          <div class="form-submit-row">
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            <p class="form-note">I typically respond within 1–2 business days.</p>
+          </div>
+
+        </form>
+
+        <!-- Success message shown after submit -->
+        <div class="form-success" id="formSuccess">
+          <div class="form-success-icon">✓</div>
+          <h4>Message sent!</h4>
+          <p>Thank you for reaching out. I'll be in touch within 1–2 business days.</p>
         </div>
-        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea></div>
-        <button type="submit" class="btn btn-primary" style="align-self:flex-start;">Send Message</button>
-        <p class="form-note">I typically respond within 1–2 business days.</p>
-      </form>
+      </div>
     </div>
   </div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('about')">About</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
@@ -639,7 +931,8 @@
   <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+  /* ── PAGE NAVIGATION ── */
   function showPage(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
@@ -660,10 +953,139 @@
     document.getElementById('hamburger').classList.remove('open');
     document.body.style.overflow = '';
   }
+
+  /* ── LIGHTBOX ── */
   function openLightbox(el, caption) {
     const img = el.querySelector('img');
     const lbImg = document.getElementById('lightboxImg');
     if (img) { lbImg.src = img.src; lbImg.style.display = 'block'; }
     else { lbImg.style.display = 'none'; }
     document.getElementById('lightboxCaption').textContent = caption || '';
-    docume
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  /* ── ACCORDION ──
+     Each item toggles open/closed. Only one open at a time (optional — remove
+     the "close others" block below if you prefer multiple open simultaneously).
+  */
+  function toggleAccordion(trigger) {
+    const item = trigger.closest('.accordion-item');
+    const body = item.querySelector('.accordion-body');
+    const isOpen = item.classList.contains('open');
+
+    // Close all siblings
+    item.closest('.accordion').querySelectorAll('.accordion-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+      i.querySelector('.accordion-body').style.maxHeight = null;
+    });
+
+    // Open this one if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+
+  /* ── SLIDESHOW ──
+     Auto-advances every 5 seconds. Dots and arrows both work.
+     Adding/removing slides in the HTML automatically updates the dots.
+  */
+  (function initSlideshow() {
+    const track  = document.getElementById('slideshowTrack');
+    const dotsEl = document.getElementById('slideshowDots');
+    if (!track) return;
+    const slides = track.querySelectorAll('.slideshow-slide');
+    let current  = 0;
+    let timer;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    });
+
+    function goTo(n) {
+      current = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      // Update caption
+      const cap = document.getElementById('slideshowCaption');
+      if (cap) cap.textContent = slides[current].dataset.caption || '';
+      // Update dots
+      dotsEl.querySelectorAll('.slideshow-dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current));
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    // Expose for buttons in HTML
+    window.slideshowMove = (dir) => goTo(current + dir);
+    resetTimer();
+  })();
+
+  /* ── CONTACT FORM ──
+     Uses Formspree. Falls back gracefully if Formspree ID not yet set.
+     Shows a success message on submission instead of redirecting.
+  */
+  /* ── EMAIL OBFUSCATION ──
+     Assembles the email address in JavaScript so Cloudflare's spam-protection
+     script never sees a plain email in the HTML — which was causing it to inject
+     code that broke all site navigation. ↓ EDIT the three parts to match your address. */
+  (function buildEmail() {
+    const user   = 'marc';
+    const domain = 'marcglass';
+    const tld    = 'com';
+    const addr   = user + '@' + domain + '.' + tld;
+    const link   = document.getElementById('emailLink');
+    if (link) { link.href = 'mailto:' + addr; link.textContent = addr; }
+  })();
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+    const form    = e.target;
+    const btn     = form.querySelector('button[type=submit]');
+    const success = document.getElementById('formSuccess');
+
+    // If Formspree ID not yet configured, show success anyway (for testing)
+    if (form.action.includes('YOUR_FORM_ID')) {
+      form.style.display = 'none';
+      success.classList.add('visible');
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const data = new FormData(form);
+      const res  = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        form.style.display = 'none';
+        success.classList.add('visible');
+      } else {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+        alert('There was a problem sending your message. Please try emailing directly.');
+      }
+    } catch {
+      btn.textContent = 'Try again';
+      btn.disabled = false;
+    }
+  }
+</script>
+</body>
+</html>
