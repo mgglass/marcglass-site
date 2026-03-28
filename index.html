@@ -64,13 +64,12 @@
 
     /* HERO */
     .hero { min-height: calc(100vh - var(--nav-h)); display: grid; grid-template-columns: 1fr 1fr; align-items: center; max-width: var(--max-w); margin: 0 auto; padding: 80px 40px; gap: 72px; }
-    .hero-eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 16px; }
     .hero-text h1 { font-family: var(--font-display); font-size: clamp(2.6rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.1; color: var(--navy); margin-bottom: 24px; }
     .hero-text h1 em { font-style: italic; color: var(--gold); }
     .hero-text p { font-size: 1.02rem; color: var(--gray-text); max-width: 400px; line-height: 1.8; margin-bottom: 36px; }
     .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
-    /* ── BUTTONS (CTA system) ──────────────────────────────────────── */
+    /* BUTTONS */
     .btn { display: inline-block; padding: 12px 28px; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.13em; text-transform: uppercase; text-decoration: none; cursor: pointer; border: none; transition: all var(--transition); font-family: var(--font-body); }
     .btn-primary   { background: var(--navy); color: var(--white); }
     .btn-primary:hover { background: var(--gold); color: var(--navy); }
@@ -80,15 +79,11 @@
     .btn-gold:hover { background: var(--navy); color: var(--white); }
     .btn-ghost     { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.5); }
     .btn-ghost:hover { background: var(--white); color: var(--navy); border-color: var(--white); }
-    /* CTA Banner — full-width call-to-action block */
     .cta-banner { background: var(--navy); padding: 72px 40px; text-align: center; }
-    .cta-banner.cta-gold { background: var(--gold); }
     .cta-banner.cta-light { background: var(--off-white); }
     .cta-banner h2 { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--white); margin-bottom: 12px; }
-    .cta-banner.cta-gold h2 { color: var(--navy); }
     .cta-banner.cta-light h2 { color: var(--navy); }
     .cta-banner p { font-size: 1rem; color: rgba(255,255,255,0.65); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
-    .cta-banner.cta-gold p { color: rgba(26,43,74,0.7); }
     .cta-banner.cta-light p { color: var(--gray-text); }
     .cta-banner .btn-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 
@@ -105,8 +100,8 @@
     .hero-thumb-label { font-family: var(--font-display); font-style: italic; font-size: 0.82rem; color: var(--white); opacity: 0; transform: translateY(6px); transition: all var(--transition); }
     .hero-thumb:hover .hero-thumb-label { opacity: 1; transform: translateY(0); }
 
-    /* ── HERO SLIDESHOW (replaces static grid when photos are added) ── */
-    .hero-slideshow { position: relative; width: 100%; overflow: hidden; border-radius: 0; }
+    /* SLIDESHOW */
+    .hero-slideshow { position: relative; width: 100%; overflow: hidden; }
     .slideshow-track { display: flex; transition: transform 0.6s cubic-bezier(0.77,0,0.175,1); will-change: transform; }
     .slideshow-slide { min-width: 100%; aspect-ratio: 4/3; overflow: hidden; position: relative; background: var(--gray-light); }
     .slideshow-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -114,7 +109,7 @@
     .slideshow-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(26,43,74,0.7)); padding: 40px 24px 20px; color: var(--white); font-family: var(--font-display); font-style: italic; font-size: 1rem; opacity: 0; transition: opacity 0.4s ease; }
     .hero-slideshow:hover .slideshow-caption { opacity: 1; }
     .slideshow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; color: var(--navy); transition: all var(--transition); z-index: 10; }
-    .slideshow-btn:hover { background: var(--gold); color: var(--navy); }
+    .slideshow-btn:hover { background: var(--gold); }
     .slideshow-btn.prev { left: 16px; }
     .slideshow-btn.next { right: 16px; }
     .slideshow-dots { display: flex; gap: 8px; justify-content: center; padding: 14px 0 4px; }
@@ -139,14 +134,13 @@
 
     /* SECTION HEADER */
     .section-header { max-width: var(--max-w); margin: 0 auto; padding: 80px 40px 48px; }
-    .section-header .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
     .section-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--navy); line-height: 1.15; margin-bottom: 16px; }
     .section-header p { font-size: 1rem; color: var(--gray-text); max-width: 560px; line-height: 1.7; }
     .divider { width: 48px; height: 2px; background: var(--gold); margin: 24px 0 0; }
 
     /* CARD GRID */
     .card-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
-    .card { background: var(--white); border: 1px solid var(--gray-light); display: flex; flex-direction: column; transition: box-shadow var(--transition), transform var(--transition); }
+    .card { background: var(--white); border: 1px solid var(--gray-light); display: flex; flex-direction: column; transition: box-shadow var(--transition), transform var(--transition); cursor: pointer; }
     .card:hover { box-shadow: 0 12px 40px rgba(26,43,74,0.1); transform: translateY(-4px); }
     .card-thumb { width: 100%; aspect-ratio: 16/9; background: var(--gray-light); overflow: hidden; position: relative; }
     .card-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
@@ -158,8 +152,8 @@
     .card-excerpt { font-size: 0.88rem; color: var(--gray-text); line-height: 1.7; flex: 1; margin-bottom: 20px; }
     .card-link { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: color var(--transition); }
     .card-link::after { content: '→'; transition: transform var(--transition); }
-    .card-link:hover { color: var(--gold); }
-    .card-link:hover::after { transform: translateX(4px); }
+    .card:hover .card-link { color: var(--gold); }
+    .card:hover .card-link::after { transform: translateX(4px); }
 
     /* MASONRY */
     .masonry-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; columns: 3; column-gap: 16px; }
@@ -178,9 +172,9 @@
     .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; box-shadow: 0 0 80px rgba(0,0,0,0.5); }
     .lightbox-close { position: absolute; top: 24px; right: 32px; color: var(--white); font-size: 2.2rem; cursor: pointer; font-weight: 300; line-height: 1; opacity: 0.6; background: none; border: none; transition: opacity var(--transition); }
     .lightbox-close:hover { opacity: 1; }
-    .lightbox-caption { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-family: var(--font-display); font-style: italic; font-size: 1rem; }
+    .lightbox-caption { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.6); font-family: var(--font-display); font-style: italic; font-size: 1rem; white-space: nowrap; }
 
-    /* ── ACCORDION ─────────────────────────────────────────────────── */
+    /* ACCORDION */
     .accordion { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; }
     .accordion-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 12px; }
     .accordion-heading { font-family: var(--font-display); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; color: var(--navy); margin-bottom: 32px; }
@@ -198,7 +192,6 @@
     .accordion-item.open .accordion-icon::after  { background: var(--white); transform: rotate(90deg) scaleY(0); }
     .accordion-body { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1); }
     .accordion-body-inner { padding: 0 0 24px; font-size: 0.95rem; color: var(--gray-text); line-height: 1.8; max-width: 680px; }
-    .accordion-body-inner p + p { margin-top: 12px; }
 
     /* ABOUT */
     .about-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 400px 1fr; gap: 80px; align-items: start; }
@@ -211,7 +204,7 @@
     .about-skills { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 10px; }
     .skill-tag { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); border: 1px solid var(--gray-mid); padding: 6px 14px; font-weight: 500; }
 
-    /* ── CONTACT FORM (enhanced) ──────────────────────────────────── */
+    /* CONTACT */
     .contact-grid { max-width: var(--max-w); margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
     .contact-info h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 300; color: var(--navy); margin-bottom: 16px; }
     .contact-info p { color: var(--gray-text); line-height: 1.8; margin-bottom: 32px; }
@@ -221,27 +214,19 @@
     .contact-item-text { font-size: 0.9rem; color: var(--gray-text); }
     .contact-item-text a { color: var(--navy); text-decoration: none; }
     .contact-item-text a:hover { color: var(--gold); }
-    .social-links { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-    .social-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border: 1px solid var(--gray-mid); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy); text-decoration: none; transition: all var(--transition); }
-    .social-link:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
-    /* Enhanced form */
     .contact-form-wrap { background: var(--off-white); padding: 40px; }
     .contact-form-wrap h4 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 300; color: var(--navy); margin-bottom: 24px; }
     .contact-form { display: flex; flex-direction: column; gap: 20px; }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .form-group { display: flex; flex-direction: column; gap: 8px; }
     .form-group label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--navy); font-weight: 500; }
-    .form-group input, .form-group textarea, .form-group select {
-      border: 1px solid var(--gray-mid); padding: 12px 16px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color var(--transition); resize: vertical; appearance: none; -webkit-appearance: none;
-    }
+    .form-group input, .form-group textarea, .form-group select { border: 1px solid var(--gray-mid); padding: 12px 16px; font-family: var(--font-body); font-size: 0.9rem; color: var(--text); background: var(--white); outline: none; transition: border-color var(--transition); resize: vertical; appearance: none; -webkit-appearance: none; }
     .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--navy); }
     .form-group textarea { min-height: 140px; }
     .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888076' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
-    /* Checkbox group */
     .form-checkboxes { display: flex; flex-direction: column; gap: 10px; }
     .form-check { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.88rem; color: var(--gray-text); }
     .form-check input[type=checkbox] { width: 16px; height: 16px; border: 1px solid var(--gray-mid); background: var(--white); cursor: pointer; accent-color: var(--navy); flex-shrink: 0; }
-    /* File upload */
     .form-file-label { display: flex; align-items: center; gap: 12px; border: 1px dashed var(--gray-mid); padding: 14px 18px; cursor: pointer; transition: border-color var(--transition); background: var(--white); }
     .form-file-label:hover { border-color: var(--navy); }
     .form-file-label span { font-size: 0.82rem; color: var(--gray-text); }
@@ -249,12 +234,32 @@
     .form-file-label input[type=file] { display: none; }
     .form-submit-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
     .form-note { font-size: 0.78rem; color: var(--gray-text); font-style: italic; }
-    /* Form success state */
     .form-success { display: none; text-align: center; padding: 40px 24px; }
     .form-success.visible { display: block; }
     .form-success-icon { font-size: 2.4rem; margin-bottom: 16px; }
     .form-success h4 { font-family: var(--font-display); font-size: 1.6rem; color: var(--navy); margin-bottom: 8px; }
     .form-success p { font-size: 0.9rem; color: var(--gray-text); }
+
+    /* DETAIL PAGE */
+    .detail-page { display: none; padding-top: var(--nav-h); min-height: 100vh; animation: fadeUp 0.45s ease both; }
+    .detail-page.active { display: block; }
+    .detail-back-bar { max-width: var(--max-w); margin: 0 auto; padding: 32px 40px 0; }
+    .detail-back-btn { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-text); background: none; border: none; cursor: pointer; padding: 0; transition: color var(--transition); }
+    .detail-back-btn::before { content: '←'; font-size: 1rem; transition: transform var(--transition); }
+    .detail-back-btn:hover { color: var(--navy); }
+    .detail-back-btn:hover::before { transform: translateX(-4px); }
+    .detail-grid { max-width: var(--max-w); margin: 0 auto; padding: 40px 40px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .detail-image-col { position: sticky; top: calc(var(--nav-h) + 24px); }
+    .detail-image-frame { width: 100%; aspect-ratio: 4/3; background: var(--gray-light); overflow: hidden; position: relative; }
+    .detail-image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .detail-image-placeholder { width: 100%; height: 100%; background: linear-gradient(135deg, var(--gray-light), var(--gray-mid)); display: flex; align-items: center; justify-content: center; color: var(--gray-text); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; }
+    .detail-image-accent { position: absolute; bottom: -12px; right: -12px; width: 60px; height: 60px; border: 2px solid var(--gold); pointer-events: none; }
+    .detail-text-col { padding-top: 8px; }
+    .detail-meta { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); font-weight: 500; margin-bottom: 14px; }
+    .detail-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 300; color: var(--navy); line-height: 1.15; margin-bottom: 28px; }
+    .detail-pullquote { border-left: 3px solid var(--gold); padding: 4px 0 4px 24px; margin: 0 0 32px; }
+    .detail-pullquote p { font-family: var(--font-display); font-size: 1.25rem; font-style: italic; font-weight: 300; color: var(--navy); line-height: 1.5; }
+    .detail-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
 
     /* FOOTER */
     footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 48px 40px; }
@@ -270,7 +275,6 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .page.active .hero-text { animation: fadeUp 0.7s ease both; }
     .page.active .hero-photo-grid { animation: fadeUp 0.7s 0.15s ease both; }
-    .page.active .hero-slideshow { animation: fadeUp 0.7s 0.15s ease both; }
     .page.active .section-header { animation: fadeUp 0.6s ease both; }
 
     /* RESPONSIVE */
@@ -289,6 +293,9 @@
       .accordion { padding: 0 24px 60px; }
       .cta-banner { padding: 56px 24px; }
       .form-row { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; padding: 32px 24px 60px; gap: 36px; }
+      .detail-image-col { position: static; }
+      .detail-back-bar { padding: 24px 24px 0; }
     }
     @media (max-width: 600px) {
       .hero-photo-grid { grid-template-columns: 1fr 1fr; }
@@ -299,20 +306,18 @@
 </head>
 <body>
 
-<!-- NAV -->
+<!-- NAV — rendered by JS from data/content.json → site.nav_name / nav_tagline -->
 <nav id="mainNav">
-  <!-- ↓ EDIT: Your name in the nav bar -->
   <div class="nav-logo" onclick="showPage('home')">
-    Marc Glass
-    <!-- ↓ EDIT: tagline below your name -->
-    <span>Strategic Communications &amp; Photography</span>
+    <span id="navName">Marc Glass</span>
+    <span id="navTagline">Strategic Communications &amp; Photography</span>
   </div>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<!-- FULL-SCREEN OVERLAY MENU -->
+<!-- OVERLAY MENU -->
 <div class="overlay-menu" id="overlayMenu">
   <a href="#" onclick="showPage('home');closeMenu()">Home</a>
   <a href="#" onclick="showPage('writing');closeMenu()">Writing &amp; Articles</a>
@@ -330,61 +335,25 @@
 <div class="page active" id="page-home">
   <section class="hero">
     <div class="hero-text">
-      <!-- ↓ EDIT: headline — wrap words in <em> for italic gold -->
-      <h1>Telling stories that <em>matter.</em></h1>
-      <!-- ↓ EDIT: tagline paragraph -->
-      <p>Award-winning writer, photographer, and communications strategist with decades of experience crafting compelling narratives across print, digital, and social media platforms.</p>
+      <h1 id="heroHeadline">Telling stories that <em>matter.</em></h1>
+      <p id="heroTagline">Award-winning writer, photographer, and communications strategist.</p>
       <div class="hero-cta">
-        <!-- ↓ CTA BUTTONS: choose btn-primary, btn-outline, btn-gold, or btn-ghost -->
-        <a class="btn btn-primary" href="#" onclick="showPage('writing')">See Portfolio</a>
+        <a class="btn btn-primary" href="#" onclick="scrollToPortfolio()">See Portfolio</a>
         <a class="btn btn-outline" href="#" onclick="showPage('contact')">Get In Touch</a>
       </div>
     </div>
-
-    <!--
-      HERO PHOTO GRID — 6 horizontal thumbnails (3 cols × 2 rows)
-      ↓ HOW TO ADD YOUR PHOTOS:
-        Replace each:  <div class="hero-thumb-ph">Photo N</div>
-        with:          <img src="photos/your-image.jpg" alt="Brief description" />
-        Keep the .hero-thumb-overlay div as-is beneath the img tag.
-    -->
-    <div class="hero-photo-grid">
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 1</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 2</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 3</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 4</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 5</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
-      <div class="hero-thumb" onclick="showPage('photography')">
-        <div class="hero-thumb-ph">Photo 6</div>
-        <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
-      </div>
+    <div class="hero-photo-grid" id="heroPhotoGrid">
+      <!-- Rendered by JS -->
     </div>
   </section>
 
-  <section class="home-sections">
+  <section class="home-sections" id="portfolio-sections">
     <div class="home-sections-inner">
-      <!-- ↓ EDIT: section label and heading -->
       <p class="eyebrow">What I Do</p>
       <h2>A Full-Spectrum Portfolio</h2>
       <div class="services-grid">
         <div class="service-card" onclick="showPage('writing')">
           <div class="service-num">01</div>
-          <!-- ↓ EDIT: tile title and description -->
           <div class="service-title">Writing &amp; Articles</div>
           <div class="service-desc">Long-form journalism, feature writing, and editorial content for leading publications.</div>
           <span class="service-arrow">→</span>
@@ -423,117 +392,32 @@
     </div>
   </section>
 
-  <!--
-    ══ HOME CTA BANNER ══
-    ↓ EDIT: headline, subtext, and button labels/destinations.
-    Switch class to cta-gold for a gold background, or cta-light for off-white.
-  -->
   <section class="cta-banner">
-    <h2>Ready to tell your story?</h2>
-    <p>Available for writing assignments, photography projects, communications consulting, and speaking engagements.</p>
+    <h2 id="ctaBannerHeadline">Ready to tell your story?</h2>
+    <p id="ctaBannerText">Available for writing assignments, photography projects, communications consulting, and speaking engagements.</p>
     <div class="btn-row">
       <a class="btn btn-gold" href="#" onclick="showPage('contact')">Start a Conversation</a>
       <a class="btn btn-ghost" href="#" onclick="showPage('about')">Learn More About Me</a>
     </div>
   </section>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div>
-      <div class="footer-links">
-        <a href="#" onclick="showPage('about')">About</a>
-        <a href="#" onclick="showPage('contact')">Contact</a>
-        <!-- ↓ EDIT: your email address -->
-        <a href="#" onclick="showPage('contact')">Contact Me</a>
-      </div>
-      <p>&copy; 2025 Marc Glass. All rights reserved.</p>
-    </div>
-  </footer>
+  <footer><div class="footer-inner"><div class="footer-logo" id="footerLogoHome">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('about')">About</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
-<!-- ══ WRITING ══
-  ↓ EDIT each card: card-meta, card-title, card-excerpt, and the href on card-link
--->
+<!-- ══ WRITING ══ -->
 <div class="page" id="page-writing">
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Writing &amp; Articles</h2>
-    <!-- ↓ EDIT: page description -->
-    <p>A selection of published work spanning feature journalism, investigative reporting, and editorial commentary across leading regional and national publications.</p>
+    <p id="writingDesc">A selection of published work spanning feature journalism, investigative reporting, and editorial commentary.</p>
     <div class="divider"></div>
   </div>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-thumb">
-        <!-- ↓ REPLACE placeholder with: <img src="photos/article1.jpg" alt="Article title" /> -->
-        <div class="card-thumb-placeholder">Thumbnail</div>
-      </div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2024</div><!-- ↓ EDIT -->
-        <div class="card-title">Article Title Goes Here</div><!-- ↓ EDIT -->
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div><!-- ↓ EDIT -->
-        <a href="#" class="card-link" target="_blank">Read Article</a><!-- ↓ EDIT href -->
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2024</div>
-        <div class="card-title">Second Article Title Here</div>
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
-        <a href="#" class="card-link" target="_blank">Read Article</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2023</div>
-        <div class="card-title">Third Article Title Here</div>
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
-        <a href="#" class="card-link" target="_blank">Read Article</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2023</div>
-        <div class="card-title">Fourth Article Title Here</div>
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
-        <a href="#" class="card-link" target="_blank">Read Article</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2022</div>
-        <div class="card-title">Fifth Article Title Here</div>
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
-        <a href="#" class="card-link" target="_blank">Read Article</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div>
-      <div class="card-body">
-        <div class="card-meta">Publication Name · 2022</div>
-        <div class="card-title">Sixth Article Title Here</div>
-        <div class="card-excerpt">A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.</div>
-        <a href="#" class="card-link" target="_blank">Read Article</a>
-      </div>
-    </div>
-  </div>
-
-  <!--
-    ══ WRITING PAGE CTA ══
-    ↓ EDIT: text and button. Switch class to cta-gold or cta-light if preferred.
-  -->
+  <div class="card-grid" id="writingGrid"><!-- Rendered by JS --></div>
   <section class="cta-banner cta-light">
     <h2>Interested in working together?</h2>
     <p>I'm available for feature writing, investigative reporting, editorial commentary, and content strategy.</p>
-    <div class="btn-row">
-      <a class="btn btn-primary" href="#" onclick="showPage('contact')">Discuss a Project</a>
-    </div>
+    <div class="btn-row"><a class="btn btn-primary" href="#" onclick="showPage('contact')">Discuss a Project</a></div>
   </section>
-
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
@@ -542,69 +426,30 @@
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Photography</h2>
-    <!-- ↓ EDIT: page description -->
-    <p>Documentary, portrait, and editorial photography. Click any image to view full size.</p>
+    <p id="photographyDesc">Documentary, portrait, and editorial photography. Click any image to view full size.</p>
     <div class="divider"></div>
   </div>
-
-  <!--
-    ══ PHOTOGRAPHY SLIDESHOW ══
-    This slideshow sits above the full masonry gallery as a featured highlight reel.
-    ↓ HOW TO ADD PHOTOS TO THE SLIDESHOW:
-      Replace each <div class="slideshow-slide-ph">...</div>
-      with: <img src="photos/your-photo.jpg" alt="Caption here" />
-      Update the data-caption attribute on the .slideshow-slide div.
-    ↓ ADD OR REMOVE SLIDES: Copy or delete entire <div class="slideshow-slide"> blocks.
-      The dots and prev/next arrows update automatically.
-  -->
-  <div class="hero-slideshow" id="photoSlideshow" style="max-width:var(--max-w);margin:0 auto 16px;padding:0 40px;">
-    <div class="slideshow-track" id="slideshowTrack">
-      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
-        <div class="slideshow-slide-ph">Featured Photo 1</div>
-        <div class="slideshow-caption" id="slideshowCaption">Featured photograph — add your caption here</div>
-      </div>
-      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
-        <div class="slideshow-slide-ph">Featured Photo 2</div>
-      </div>
-      <div class="slideshow-slide" data-caption="Featured photograph — add your caption here">
-        <div class="slideshow-slide-ph">Featured Photo 3</div>
-      </div>
+  <div style="max-width:var(--max-w);margin:0 auto 16px;padding:0 40px;">
+    <div class="hero-slideshow" id="photoSlideshow">
+      <div class="slideshow-track" id="slideshowTrack"><!-- Rendered by JS --></div>
+      <button class="slideshow-btn prev" onclick="slideshowMove(-1)" aria-label="Previous">&#8592;</button>
+      <button class="slideshow-btn next" onclick="slideshowMove(1)" aria-label="Next">&#8594;</button>
     </div>
-    <button class="slideshow-btn prev" onclick="slideshowMove(-1)" aria-label="Previous">&#8592;</button>
-    <button class="slideshow-btn next" onclick="slideshowMove(1)" aria-label="Next">&#8594;</button>
+    <div class="slideshow-dots" id="slideshowDots"></div>
   </div>
-  <div class="slideshow-dots" id="slideshowDots"></div>
-
-  <div class="masonry-grid" style="margin-top:32px;">
-    <div class="masonry-placeholder" style="height:280px">Photo 1</div>
-    <div class="masonry-placeholder" style="height:380px">Photo 2</div>
-    <div class="masonry-placeholder" style="height:220px">Photo 3</div>
-    <div class="masonry-placeholder" style="height:320px">Photo 4</div>
-    <div class="masonry-placeholder" style="height:260px">Photo 5</div>
-    <div class="masonry-placeholder" style="height:420px">Photo 6</div>
-    <div class="masonry-placeholder" style="height:300px">Photo 7</div>
-    <div class="masonry-placeholder" style="height:240px">Photo 8</div>
-    <div class="masonry-placeholder" style="height:360px">Photo 9</div>
-    <div class="masonry-placeholder" style="height:200px">Photo 10</div>
-    <div class="masonry-placeholder" style="height:340px">Photo 11</div>
-    <div class="masonry-placeholder" style="height:290px">Photo 12</div>
-  </div>
+  <div class="masonry-grid" id="galleryGrid" style="margin-top:32px;"><!-- Rendered by JS --></div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
-<!-- ══ SOCIAL MEDIA & EMAIL ══ -->
+<!-- ══ SOCIAL ══ -->
 <div class="page" id="page-social">
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Social Media &amp; Email Marketing</h2>
-    <p>Strategic social media campaigns, content calendars, and email marketing programs that build engaged audiences and drive measurable results.</p>
+    <p id="socialDesc">Strategic social media campaigns, content calendars, and email marketing programs.</p>
     <div class="divider"></div>
   </div>
-  <div class="card-grid">
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Social Media Campaign · 2024</div><div class="card-title">Campaign or Project Title Here</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Email Newsletter · 2024</div><div class="card-title">Email Marketing Campaign Title</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Instagram Strategy · 2023</div><div class="card-title">Third Social Project Title</div><div class="card-excerpt">Description of this project — the client, the goal, the strategy, and the results achieved.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-  </div>
+  <div class="card-grid" id="socialGrid"><!-- Rendered by JS --></div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
@@ -613,14 +458,10 @@
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Infographics</h2>
-    <p>Data visualization and infographic design that transforms complex information into clear, engaging, and shareable visual stories.</p>
+    <p id="infographicsDesc">Data visualization and infographic design that transforms complex information into clear visual stories.</p>
     <div class="divider"></div>
   </div>
-  <div class="card-grid">
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2024</div><div class="card-title">Infographic Title Here</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2024</div><div class="card-title">Second Infographic Title</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Data Visualization · 2023</div><div class="card-title">Third Infographic Title</div><div class="card-excerpt">What data it visualizes, who it was created for, and what story it tells.</div><a href="#" class="card-link" target="_blank">View Full Size</a></div></div>
-  </div>
+  <div class="card-grid" id="infographicsGrid"><!-- Rendered by JS --></div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
@@ -629,14 +470,10 @@
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Web Content</h2>
-    <p>SEO-optimized web copy, landing pages, blog content, and digital content strategy that engages audiences and drives results.</p>
+    <p id="webcontentDesc">SEO-optimized web copy, landing pages, blog content, and digital content strategy.</p>
     <div class="divider"></div>
   </div>
-  <div class="card-grid">
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Website Copy · 2024</div><div class="card-title">Web Project Title Here</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Blog Content · 2024</div><div class="card-title">Second Web Content Title</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Landing Page · 2023</div><div class="card-title">Third Web Content Title</div><div class="card-excerpt">The client, the platform, the content strategy, and the outcome.</div><a href="#" class="card-link" target="_blank">View Project</a></div></div>
-  </div>
+  <div class="card-grid" id="webcontentGrid"><!-- Rendered by JS --></div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
@@ -645,21 +482,14 @@
   <div class="section-header">
     <p class="eyebrow">Portfolio</p>
     <h2>Publicity</h2>
-    <p>Press releases, media pitches, and public relations campaigns that earn meaningful media coverage for clients and causes that matter.</p>
+    <p id="publicityDesc">Press releases, media pitches, and public relations campaigns that earn meaningful coverage.</p>
     <div class="divider"></div>
   </div>
-  <div class="card-grid">
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Press Release · 2024</div><div class="card-title">Publicity Project Title Here</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">Media Campaign · 2024</div><div class="card-title">Second Publicity Project</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
-    <div class="card"><div class="card-thumb"><div class="card-thumb-placeholder">Thumbnail</div></div><div class="card-body"><div class="card-meta">PR Strategy · 2023</div><div class="card-title">Third Publicity Project</div><div class="card-excerpt">The client, the campaign goals, the media outlets targeted, and the coverage achieved.</div><a href="#" class="card-link" target="_blank">View Coverage</a></div></div>
-  </div>
+  <div class="card-grid" id="publicityGrid"><!-- Rendered by JS --></div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
-<!-- ══ ABOUT ══
-  ↓ EDIT: h3 tagline, all <p> bio paragraphs, skill tags
-  ↓ PHOTO: replace the inner placeholder div with <img src="photos/headshot.jpg" alt="Marc Glass" />
--->
+<!-- ══ ABOUT ══ -->
 <div class="page" id="page-about">
   <div class="section-header">
     <p class="eyebrow">About</p>
@@ -669,116 +499,26 @@
   </div>
   <div class="about-grid">
     <div class="about-photo">
-      <div class="about-photo-frame">
-        <!-- ↓ REPLACE with: <img src="photos/headshot.jpg" alt="Marc Glass" /> -->
-        <div style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy),#2d4a7a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.25);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">Your Photo Here</div>
+      <div class="about-photo-frame" id="aboutPhotoFrame">
+        <div id="aboutPhotoPlaceholder" style="width:100%;height:100%;background:linear-gradient(135deg,var(--navy),#2d4a7a);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.25);font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;">Your Photo Here</div>
       </div>
       <div class="about-photo-accent"></div>
     </div>
     <div class="about-content">
-      <!-- ↓ EDIT: your professional headline -->
-      <h3>Writer. Photographer.<br>Communications Strategist.</h3>
-      <!-- ↓ EDIT: replace these paragraphs with your actual bio -->
-      <p>This is where your bio goes. Replace this placeholder text with your own story — your background, your areas of expertise, the publications and clients you've worked with, and what drives your work.</p>
-      <p>You might talk about your journalism career, your photography practice, and how the two disciplines inform each other. Mention notable projects, awards, or recognitions that establish your credibility and voice.</p>
-      <p>A third paragraph might speak to your approach — your philosophy as a storyteller, what you look for in a story, and the kinds of clients or collaborations you're most interested in pursuing.</p>
-      <div class="about-skills">
-        <!-- ↓ EDIT: add, remove, or rename these skill tags -->
-        <span class="skill-tag">Feature Writing</span>
-        <span class="skill-tag">Investigative Reporting</span>
-        <span class="skill-tag">Documentary Photography</span>
-        <span class="skill-tag">Editorial Photography</span>
-        <span class="skill-tag">Social Media Strategy</span>
-        <span class="skill-tag">Email Marketing</span>
-        <span class="skill-tag">Infographic Design</span>
-        <span class="skill-tag">Web Content</span>
-        <span class="skill-tag">Press Relations</span>
-        <span class="skill-tag">Media Pitching</span>
-      </div>
+      <h3 id="aboutHeadline">Writer. Photographer. Communications Strategist.</h3>
+      <div id="aboutBio"><!-- Rendered by JS --></div>
+      <div class="about-skills" id="aboutSkills"><!-- Rendered by JS --></div>
     </div>
   </div>
-
-  <!--
-    ══ ABOUT PAGE ACCORDION ══
-    Use this section for FAQs, services detail, process steps, or anything
-    you want accessible without cluttering the page.
-    ↓ EDIT: change the heading, label, and each accordion-trigger-text / accordion-body-inner.
-    ↓ ADD an item: copy one full <div class="accordion-item"> block and paste it.
-    ↓ REMOVE an item: delete one full <div class="accordion-item"> block.
-  -->
   <div class="accordion">
     <p class="accordion-label">Learn More</p>
     <h3 class="accordion-heading">Frequently Asked Questions</h3>
-
-    <div class="accordion-item">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
-        <span class="accordion-trigger-text">What kinds of writing projects do you take on?</span>
-        <span class="accordion-icon" aria-hidden="true"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <p>Replace this with your actual answer. I work on feature journalism, investigative reporting, profiles, essays, and editorial commentary for publications ranging from regional outlets to national magazines. I'm also available for branded content, white papers, and long-form web copy.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
-        <span class="accordion-trigger-text">Are you available for photography assignments outside Maine?</span>
-        <span class="accordion-icon" aria-hidden="true"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <p>Replace this with your actual answer. Yes — I travel for documentary, portrait, and editorial assignments. My home base is Maine, but I've worked throughout New England and beyond. Travel costs are discussed as part of project scoping.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
-        <span class="accordion-trigger-text">How does your communications consulting work?</span>
-        <span class="accordion-icon" aria-hidden="true"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <p>Replace this with your actual answer. I work with organizations and individuals to develop communications strategies, craft key messages, manage media relationships, and create the written and visual content that brings those strategies to life. Engagements range from one-time projects to ongoing retainer arrangements.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
-        <span class="accordion-trigger-text">What is your typical turnaround time?</span>
-        <span class="accordion-icon" aria-hidden="true"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <p>Replace this with your actual answer. Turnaround depends on the scope and complexity of the project. For shorter pieces, I can often turn around a first draft within a week. Larger projects are scoped and scheduled individually. I'm happy to discuss your timeline during our initial conversation.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion-item">
-      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
-        <span class="accordion-trigger-text">Do you offer speaking engagements or workshops?</span>
-        <span class="accordion-icon" aria-hidden="true"></span>
-      </button>
-      <div class="accordion-body">
-        <div class="accordion-body-inner">
-          <p>Replace this with your actual answer. Yes. I speak on topics including visual storytelling, narrative journalism, communications strategy, and the intersection of photography and writing. I also lead workshops for journalists, communications professionals, and organizations. Reach out through the contact page to discuss.</p>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /accordion -->
-
+    <div id="faqList"><!-- Rendered by JS --></div>
+  </div>
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
-<!-- ══ CONTACT ══
-  ↓ EDIT: email, location, social link URLs
-  ↓ FORMSPREE: sign up free at formspree.io — replace YOUR_FORM_ID below
--->
+<!-- ══ CONTACT ══ -->
 <div class="page" id="page-contact">
   <div class="section-header">
     <p class="eyebrow">Get In Touch</p>
@@ -793,38 +533,10 @@
       <div class="contact-detail">
         <div class="contact-item">
           <div class="contact-icon">✉</div>
-          <!-- ↓ EDIT: your email -->
-          <div class="contact-item-text"><a id="emailLink" href="#">Loading…</a></div>
+          <div class="contact-item-text"><a id="emailLink" href="#">Email Me</a></div>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon">🌐</div>
-          <div class="contact-item-text"><a href="https://marcglass.com" target="_blank">marcglass.com</a></div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <!-- ↓ EDIT: your location -->
-          <div class="contact-item-text">Maine, USA</div>
-        </div>
-      </div>
-      <!-- ↓ EDIT: replace # with your real social media URLs -->
-      <div class="social-links">
-        <a href="#" class="social-link" target="_blank">LinkedIn</a>
-        <a href="#" class="social-link" target="_blank">Instagram</a>
-        <a href="#" class="social-link" target="_blank">Twitter / X</a>
       </div>
     </div>
-
-    <!--
-      ══ ENHANCED CONTACT FORM ══
-      New features added:
-        • Name + Email on one row (cleaner layout)
-        • "How did you hear about me?" dropdown
-        • Checkboxes for services of interest
-        • Optional file attachment field
-        • Animated success confirmation on submit
-      ↓ FORMSPREE: replace YOUR_FORM_ID after signing up at formspree.io
-      ↓ EDIT: adjust checkbox options to match your services
-    -->
     <div class="contact-form-wrap">
       <h4>Send a message</h4>
       <div id="contactFormContainer">
@@ -832,18 +544,16 @@
               action="https://formspree.io/f/YOUR_FORM_ID"
               method="POST"
               onsubmit="handleFormSubmit(event)">
-
           <div class="form-row">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" placeholder="Your full name" required />
+              <label for="fname">Name</label>
+              <input type="text" id="fname" name="name" placeholder="Your full name" required />
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="your@email.com" required />
+              <label for="femail">Email</label>
+              <input type="email" id="femail" name="email" placeholder="your@email.com" required />
             </div>
           </div>
-
           <div class="form-group">
             <label for="subject">Inquiry Type</label>
             <select id="subject" name="subject">
@@ -858,8 +568,6 @@
               <option>General Inquiry</option>
             </select>
           </div>
-
-          <!-- ↓ EDIT: rename or add/remove checkbox options -->
           <div class="form-group">
             <label>Services of Interest (check all that apply)</label>
             <div class="form-checkboxes">
@@ -871,7 +579,6 @@
               <label class="form-check"><input type="checkbox" name="services" value="Speaking" /> Speaking / Workshops</label>
             </div>
           </div>
-
           <div class="form-group">
             <label for="heard">How did you hear about me?</label>
             <select id="heard" name="how_heard">
@@ -885,34 +592,24 @@
               <option>Other</option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="message">Message</label>
             <textarea id="message" name="message" placeholder="Tell me about your project — the more detail, the better." required></textarea>
           </div>
-
-          <!-- ↓ Optional file attachment — remove this block if you don't need it -->
           <div class="form-group">
             <label>Attach a brief or reference document (optional)</label>
             <label class="form-file-label">
               <span>📎</span>
-              <div>
-                <strong>Choose File</strong>
-                <span id="fileNameDisplay"> — no file selected</span>
-              </div>
+              <div><strong>Choose File</strong><span id="fileNameDisplay"> — no file selected</span></div>
               <input type="file" name="attachment" accept=".pdf,.doc,.docx,.txt,.jpg,.png"
-                     onchange="document.getElementById('fileNameDisplay').textContent = ' — ' + (this.files[0]?.name || 'no file selected')" />
+                     onchange="document.getElementById('fileNameDisplay').textContent=' — '+(this.files[0]?.name||'no file selected')" />
             </label>
           </div>
-
           <div class="form-submit-row">
             <button type="submit" class="btn btn-primary">Send Message</button>
             <p class="form-note">I typically respond within 1–2 business days.</p>
           </div>
-
         </form>
-
-        <!-- Success message shown after submit -->
         <div class="form-success" id="formSuccess">
           <div class="form-success-icon">✓</div>
           <h4>Message sent!</h4>
@@ -924,6 +621,31 @@
   <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('about')">About</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
 </div>
 
+<!-- ══ SHARED DETAIL PAGE ══ -->
+<div class="detail-page" id="page-detail">
+  <div class="detail-back-bar">
+    <button class="detail-back-btn" id="detailBackBtn" onclick="closeDetail()">Back</button>
+  </div>
+  <div class="detail-grid">
+    <div class="detail-image-col">
+      <div class="detail-image-frame" id="detailImageFrame">
+        <div class="detail-image-placeholder" id="detailImagePlaceholder">Image</div>
+      </div>
+      <div class="detail-image-accent"></div>
+    </div>
+    <div class="detail-text-col">
+      <div class="detail-meta" id="detailMeta"></div>
+      <h2 class="detail-title" id="detailTitle"></h2>
+      <div class="detail-pullquote"><p id="detailPullquote"></p></div>
+      <div class="detail-cta">
+        <a class="btn btn-primary" id="detailReadBtn" href="#" target="_blank" rel="noopener">Read the Full Article</a>
+        <button class="btn btn-outline" onclick="closeDetail()">← Back to Portfolio</button>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-logo">Marc Glass<span>Strategic Communications &amp; Photography</span></div><div class="footer-links"><a href="#" onclick="showPage('home')">Home</a><a href="#" onclick="showPage('contact')">Contact</a></div><p>&copy; 2025 Marc Glass. All rights reserved.</p></div></footer>
+</div>
+
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
   <button class="lightbox-close" onclick="closeLightbox()">×</button>
@@ -932,160 +654,413 @@
 </div>
 
 <script>
-  /* ── PAGE NAVIGATION ── */
-  function showPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById('page-' + id).classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ═══════════════════════════════════════════════════════════════════
+//  MARC GLASS PORTFOLIO — Main Script
+//  Loads all content from data/content.json and renders the site.
+//  Navigation, slideshow, accordion, detail page, contact form,
+//  and email obfuscation are all handled here.
+// ═══════════════════════════════════════════════════════════════════
+
+// ── CONTENT LOADER ─────────────────────────────────────────────────
+// Fetches data/content.json and renders every section.
+// The CMS edits content.json; this script reads it fresh every page load.
+
+async function loadContent() {
+  try {
+    const res  = await fetch('data/content.json?v=' + Date.now());
+    const data = await res.json();
+    renderSite(data);
+  } catch (e) {
+    // If fetch fails (e.g. opening file:// locally), site still shows
+    // with the placeholder text already in the HTML.
+    console.warn('Could not load content.json — using built-in placeholders.', e);
   }
-  window.addEventListener('scroll', () => {
-    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+}
+
+function renderSite(d) {
+  // ── SITE META ──
+  if (d.site) {
+    document.title = d.site.title || document.title;
+    setText('navName',    d.site.nav_name);
+    setText('navTagline', d.site.nav_tagline);
+  }
+
+  // ── HOME ──
+  if (d.home) {
+    setHTML('heroHeadline',   d.home.hero_headline);
+    setText('heroTagline',    d.home.hero_tagline);
+    setText('ctaBannerHeadline', d.home.cta_banner_headline);
+    setText('ctaBannerText',     d.home.cta_banner_text);
+    renderHeroPhotos(d.home.hero_photos || []);
+  }
+
+  // ── ABOUT ──
+  if (d.about) {
+    setText('aboutHeadline', d.about.headline);
+    renderAboutPhoto(d.about.photo);
+    renderAboutBio(d.about);
+    renderSkills(d.about.skills || []);
+    renderFAQ(d.about.faq || []);
+  }
+
+  // ── WRITING ──
+  if (d.writing) {
+    setText('writingDesc', d.writing.page_description);
+    renderCards('writingGrid', d.writing.articles || [], 'writing', 'Writing &amp; Articles', 'Read Article');
+  }
+
+  // ── PHOTOGRAPHY ──
+  if (d.photography) {
+    setText('photographyDesc', d.photography.page_description);
+    renderSlideshow(d.photography.slideshow || []);
+    renderGallery(d.photography.gallery || []);
+  }
+
+  // ── SOCIAL ──
+  if (d.social) {
+    setText('socialDesc', d.social.page_description);
+    renderCards('socialGrid', d.social.projects || [], 'social', 'Social &amp; Email Marketing', 'View Project');
+  }
+
+  // ── INFOGRAPHICS ──
+  if (d.infographics) {
+    setText('infographicsDesc', d.infographics.page_description);
+    renderCards('infographicsGrid', d.infographics.projects || [], 'infographics', 'Infographics', 'View Full Size');
+  }
+
+  // ── WEB CONTENT ──
+  if (d.webcontent) {
+    setText('webcontentDesc', d.webcontent.page_description);
+    renderCards('webcontentGrid', d.webcontent.projects || [], 'webcontent', 'Web Content', 'View Project');
+  }
+
+  // ── PUBLICITY ──
+  if (d.publicity) {
+    setText('publicityDesc', d.publicity.page_description);
+    renderCards('publicityGrid', d.publicity.projects || [], 'publicity', 'Publicity', 'View Coverage');
+  }
+}
+
+// ── RENDER HELPERS ─────────────────────────────────────────────────
+
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el && val) el.textContent = val;
+}
+function setHTML(id, val) {
+  const el = document.getElementById(id);
+  if (el && val) el.innerHTML = val;
+}
+
+function renderHeroPhotos(photos) {
+  const grid = document.getElementById('heroPhotoGrid');
+  if (!grid) return;
+  grid.innerHTML = photos.map((p, i) => `
+    <div class="hero-thumb" onclick="showPage('photography')">
+      ${p.src
+        ? `<img src="${p.src}" alt="${esc(p.alt)}" />`
+        : `<div class="hero-thumb-ph">${esc(p.alt || 'Photo ' + (i+1))}</div>`}
+      <div class="hero-thumb-overlay"><span class="hero-thumb-label">View Photography</span></div>
+    </div>`).join('');
+}
+
+function renderAboutPhoto(src) {
+  const frame = document.getElementById('aboutPhotoFrame');
+  const ph    = document.getElementById('aboutPhotoPlaceholder');
+  if (!frame) return;
+  if (src) {
+    const img = document.createElement('img');
+    img.src = src; img.alt = 'Marc Glass';
+    img.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+    if (ph) ph.remove();
+    frame.appendChild(img);
+  }
+}
+
+function renderAboutBio(about) {
+  const bio = document.getElementById('aboutBio');
+  if (!bio) return;
+  bio.innerHTML = [about.bio_paragraph_1, about.bio_paragraph_2, about.bio_paragraph_3]
+    .filter(Boolean).map(p => `<p>${esc(p)}</p>`).join('');
+}
+
+function renderSkills(skills) {
+  const el = document.getElementById('aboutSkills');
+  if (!el) return;
+  el.innerHTML = skills.map(s => `<span class="skill-tag">${esc(s)}</span>`).join('');
+}
+
+function renderFAQ(items) {
+  const el = document.getElementById('faqList');
+  if (!el) return;
+  el.innerHTML = items.map(item => `
+    <div class="accordion-item">
+      <button class="accordion-trigger" onclick="toggleAccordion(this)" aria-expanded="false">
+        <span class="accordion-trigger-text">${esc(item.question)}</span>
+        <span class="accordion-icon" aria-hidden="true"></span>
+      </button>
+      <div class="accordion-body">
+        <div class="accordion-body-inner"><p>${esc(item.answer)}</p></div>
+      </div>
+    </div>`).join('');
+}
+
+// Generic card renderer — works for writing, social, infographics, webcontent, publicity
+function renderCards(gridId, items, backPage, backLabel, linkLabel) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = items.map(item => {
+    const meta = item.publication
+      ? `${esc(item.publication)} · ${esc(item.year)}`
+      : `${esc(item.category)} · ${esc(item.year)}`;
+    const onclick = `openDetail(
+      '${esc(meta)}',
+      '${escQ(item.title)}',
+      '${escQ(item.pullquote)}',
+      '${escQ(item.url || '')}',
+      '${escQ(item.image || '')}',
+      '${backPage}',
+      '${backLabel}')`;
+    return `
+    <div class="card" onclick="${onclick}">
+      <div class="card-thumb">
+        ${item.image
+          ? `<img src="${esc(item.image)}" alt="${esc(item.title)}" />`
+          : `<div class="card-thumb-placeholder">Thumbnail</div>`}
+      </div>
+      <div class="card-body">
+        <div class="card-meta">${meta}</div>
+        <div class="card-title">${esc(item.title)}</div>
+        <div class="card-excerpt">${esc(item.excerpt)}</div>
+        <span class="card-link">${linkLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderSlideshow(slides) {
+  const track = document.getElementById('slideshowTrack');
+  const dots  = document.getElementById('slideshowDots');
+  if (!track) return;
+  if (!slides.length) {
+    track.innerHTML = '<div class="slideshow-slide"><div class="slideshow-slide-ph">Add photos in the CMS</div></div>';
+    return;
+  }
+  track.innerHTML = slides.map((s, i) => `
+    <div class="slideshow-slide" data-caption="${esc(s.caption)}">
+      ${s.src
+        ? `<img src="${esc(s.src)}" alt="${esc(s.caption)}" />`
+        : `<div class="slideshow-slide-ph">${esc(s.caption)}</div>`}
+      ${i === 0 ? `<div class="slideshow-caption" id="slideshowCaption">${esc(s.caption)}</div>` : ''}
+    </div>`).join('');
+  initSlideshow();
+}
+
+function renderGallery(photos) {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  if (!photos.length) {
+    grid.innerHTML = '<div class="masonry-placeholder" style="height:200px">Add photos in the CMS</div>';
+    return;
+  }
+  grid.innerHTML = photos.map(p => {
+    if (p.src) {
+      return `
+      <div class="masonry-item" onclick="openLightbox(this,'${escQ(p.caption)}')">
+        <img src="${esc(p.src)}" alt="${esc(p.caption)}" />
+        <div class="masonry-item-overlay"><span class="masonry-caption">${esc(p.caption)}</span></div>
+      </div>`;
+    }
+    return `<div class="masonry-placeholder" style="height:${p.height||240}px">${esc(p.caption)}</div>`;
+  }).join('');
+}
+
+// Escape for HTML text content
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// Escape for use inside onclick="..." single-quoted JS string args
+function escQ(s) { return String(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'&quot;').replace(/\n/g,' '); }
+
+// ── PAGE NAVIGATION ────────────────────────────────────────────────
+function showPage(id, pushState) {
+  document.querySelectorAll('.page, .detail-page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + id);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (pushState !== false) history.pushState({ page: id }, '', '#' + id);
+}
+
+window.addEventListener('popstate', function(e) {
+  const state = e.state || {};
+  if (state.page === 'detail') showPage(state.back || 'home', false);
+  else showPage(state.page || 'home', false);
+});
+
+history.replaceState({ page: 'home' }, '', window.location.pathname);
+
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+function scrollToPortfolio() {
+  document.querySelectorAll('.page, .detail-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  setTimeout(() => {
+    const t = document.getElementById('portfolio-sections');
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  }, 50);
+  return false;
+}
+
+function toggleMenu() {
+  const menu = document.getElementById('overlayMenu');
+  const btn  = document.getElementById('hamburger');
+  const open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+}
+function closeMenu() {
+  document.getElementById('overlayMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ── LIGHTBOX ───────────────────────────────────────────────────────
+function openLightbox(el, caption) {
+  const img   = el.querySelector('img');
+  const lbImg = document.getElementById('lightboxImg');
+  if (img) { lbImg.src = img.src; lbImg.style.display = 'block'; }
+  else { lbImg.style.display = 'none'; }
+  document.getElementById('lightboxCaption').textContent = caption || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeMenu(); } });
+
+// ── ACCORDION ──────────────────────────────────────────────────────
+function toggleAccordion(trigger) {
+  const item   = trigger.closest('.accordion-item');
+  const body   = item.querySelector('.accordion-body');
+  const isOpen = item.classList.contains('open');
+  item.closest('.accordion').querySelectorAll('.accordion-item').forEach(i => {
+    i.classList.remove('open');
+    i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+    i.querySelector('.accordion-body').style.maxHeight = null;
   });
-  function toggleMenu() {
-    const menu = document.getElementById('overlayMenu');
-    const btn  = document.getElementById('hamburger');
-    const isOpen = menu.classList.toggle('open');
-    btn.classList.toggle('open', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
+  if (!isOpen) {
+    item.classList.add('open');
+    trigger.setAttribute('aria-expanded', 'true');
+    body.style.maxHeight = body.scrollHeight + 'px';
   }
-  function closeMenu() {
-    document.getElementById('overlayMenu').classList.remove('open');
-    document.getElementById('hamburger').classList.remove('open');
-    document.body.style.overflow = '';
+}
+
+// ── SLIDESHOW ──────────────────────────────────────────────────────
+let _slideshowCurrent = 0;
+let _slideshowTimer;
+
+function initSlideshow() {
+  const track  = document.getElementById('slideshowTrack');
+  const dotsEl = document.getElementById('slideshowDots');
+  if (!track) return;
+  const slides = track.querySelectorAll('.slideshow-slide');
+  if (!slides.length) return;
+  _slideshowCurrent = 0;
+  dotsEl.innerHTML  = '';
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', 'Go to slide ' + (i+1));
+    d.onclick = () => slideshowGoTo(i);
+    dotsEl.appendChild(d);
+  });
+  clearInterval(_slideshowTimer);
+  _slideshowTimer = setInterval(() => slideshowGoTo(_slideshowCurrent + 1), 5000);
+}
+
+function slideshowGoTo(n) {
+  const track  = document.getElementById('slideshowTrack');
+  const dotsEl = document.getElementById('slideshowDots');
+  if (!track) return;
+  const slides = track.querySelectorAll('.slideshow-slide');
+  _slideshowCurrent = (n + slides.length) % slides.length;
+  track.style.transform = 'translateX(-' + (_slideshowCurrent * 100) + '%)';
+  const cap = document.getElementById('slideshowCaption');
+  if (cap) cap.textContent = slides[_slideshowCurrent].dataset.caption || '';
+  dotsEl.querySelectorAll('.slideshow-dot').forEach((d, i) =>
+    d.classList.toggle('active', i === _slideshowCurrent));
+  clearInterval(_slideshowTimer);
+  _slideshowTimer = setInterval(() => slideshowGoTo(_slideshowCurrent + 1), 5000);
+}
+
+window.slideshowMove = (dir) => slideshowGoTo(_slideshowCurrent + dir);
+
+// ── DETAIL PAGE ────────────────────────────────────────────────────
+let _detailBackPage = 'writing';
+
+function openDetail(meta, title, pullquote, url, imgSrc, backPage, backLabel) {
+  _detailBackPage = backPage || 'writing';
+  document.getElementById('detailMeta').textContent      = meta;
+  document.getElementById('detailTitle').textContent     = title;
+  document.getElementById('detailPullquote').textContent = pullquote;
+  document.getElementById('detailBackBtn').textContent   = '← Back to ' + (backLabel || 'Portfolio').replace(/&amp;/g, '&');
+  const readBtn = document.getElementById('detailReadBtn');
+  if (url && url !== '#' && url !== '') { readBtn.href = url; readBtn.style.display = ''; }
+  else { readBtn.style.display = 'none'; }
+  const frame = document.getElementById('detailImageFrame');
+  const ph    = document.getElementById('detailImagePlaceholder');
+  const existing = frame.querySelector('img');
+  if (existing) existing.remove();
+  if (imgSrc) {
+    const img = document.createElement('img');
+    img.src = imgSrc; img.alt = title;
+    if (ph) ph.style.display = 'none';
+    frame.appendChild(img);
+  } else {
+    if (ph) { ph.style.display = ''; ph.textContent = title; }
   }
+  document.querySelectorAll('.page, .detail-page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-detail').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  history.pushState({ page: 'detail', back: _detailBackPage }, '', '#detail');
+}
 
-  /* ── LIGHTBOX ── */
-  function openLightbox(el, caption) {
-    const img = el.querySelector('img');
-    const lbImg = document.getElementById('lightboxImg');
-    if (img) { lbImg.src = img.src; lbImg.style.display = 'block'; }
-    else { lbImg.style.display = 'none'; }
-    document.getElementById('lightboxCaption').textContent = caption || '';
-    document.getElementById('lightbox').classList.add('open');
-    document.body.style.overflow = 'hidden';
+function closeDetail() { showPage(_detailBackPage); }
+
+// ── EMAIL OBFUSCATION ──────────────────────────────────────────────
+// Assembled in JS so Cloudflare never sees a plain address in the HTML.
+// ↓ EDIT the three parts below if your email address ever changes.
+(function buildEmail() {
+  const user   = 'marcgglass';
+  const domain = 'gmail';
+  const tld    = 'com';
+  const addr   = user + '@' + domain + '.' + tld;
+  const link   = document.getElementById('emailLink');
+  if (link) link.href = 'mailto:' + addr;
+})();
+
+// ── CONTACT FORM ───────────────────────────────────────────────────
+// ↓ Replace YOUR_FORM_ID in the <form> action above after signing up at formspree.io
+async function handleFormSubmit(e) {
+  e.preventDefault();
+  const form    = e.target;
+  const btn     = form.querySelector('button[type=submit]');
+  const success = document.getElementById('formSuccess');
+  if (form.action.includes('YOUR_FORM_ID')) {
+    form.style.display = 'none'; success.classList.add('visible'); return;
   }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  try {
+    const res = await fetch(form.action, { method:'POST', body: new FormData(form), headers:{'Accept':'application/json'} });
+    if (res.ok) { form.style.display = 'none'; success.classList.add('visible'); }
+    else { btn.textContent = 'Try again'; btn.disabled = false; alert('There was a problem. Please try emailing directly.'); }
+  } catch { btn.textContent = 'Try again'; btn.disabled = false; }
+}
 
-  /* ── ACCORDION ──
-     Each item toggles open/closed. Only one open at a time (optional — remove
-     the "close others" block below if you prefer multiple open simultaneously).
-  */
-  function toggleAccordion(trigger) {
-    const item = trigger.closest('.accordion-item');
-    const body = item.querySelector('.accordion-body');
-    const isOpen = item.classList.contains('open');
-
-    // Close all siblings
-    item.closest('.accordion').querySelectorAll('.accordion-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
-      i.querySelector('.accordion-body').style.maxHeight = null;
-    });
-
-    // Open this one if it was closed
-    if (!isOpen) {
-      item.classList.add('open');
-      trigger.setAttribute('aria-expanded', 'true');
-      body.style.maxHeight = body.scrollHeight + 'px';
-    }
-  }
-
-  /* ── SLIDESHOW ──
-     Auto-advances every 5 seconds. Dots and arrows both work.
-     Adding/removing slides in the HTML automatically updates the dots.
-  */
-  (function initSlideshow() {
-    const track  = document.getElementById('slideshowTrack');
-    const dotsEl = document.getElementById('slideshowDots');
-    if (!track) return;
-    const slides = track.querySelectorAll('.slideshow-slide');
-    let current  = 0;
-    let timer;
-
-    // Build dots
-    slides.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'slideshow-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      d.onclick = () => goTo(i);
-      dotsEl.appendChild(d);
-    });
-
-    function goTo(n) {
-      current = (n + slides.length) % slides.length;
-      track.style.transform = 'translateX(-' + (current * 100) + '%)';
-      // Update caption
-      const cap = document.getElementById('slideshowCaption');
-      if (cap) cap.textContent = slides[current].dataset.caption || '';
-      // Update dots
-      dotsEl.querySelectorAll('.slideshow-dot').forEach((d, i) =>
-        d.classList.toggle('active', i === current));
-      resetTimer();
-    }
-
-    function resetTimer() {
-      clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 5000);
-    }
-
-    // Expose for buttons in HTML
-    window.slideshowMove = (dir) => goTo(current + dir);
-    resetTimer();
-  })();
-
-  /* ── CONTACT FORM ──
-     Uses Formspree. Falls back gracefully if Formspree ID not yet set.
-     Shows a success message on submission instead of redirecting.
-  */
-  /* ── EMAIL OBFUSCATION ──
-     Assembles the email address in JavaScript so Cloudflare's spam-protection
-     script never sees a plain email in the HTML — which was causing it to inject
-     code that broke all site navigation. ↓ EDIT the three parts to match your address. */
-  (function buildEmail() {
-    const user   = 'marc';
-    const domain = 'marcglass';
-    const tld    = 'com';
-    const addr   = user + '@' + domain + '.' + tld;
-    const link   = document.getElementById('emailLink');
-    if (link) { link.href = 'mailto:' + addr; link.textContent = addr; }
-  })();
-
-  async function handleFormSubmit(e) {
-    e.preventDefault();
-    const form    = e.target;
-    const btn     = form.querySelector('button[type=submit]');
-    const success = document.getElementById('formSuccess');
-
-    // If Formspree ID not yet configured, show success anyway (for testing)
-    if (form.action.includes('YOUR_FORM_ID')) {
-      form.style.display = 'none';
-      success.classList.add('visible');
-      return;
-    }
-
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
-
-    try {
-      const data = new FormData(form);
-      const res  = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
-      if (res.ok) {
-        form.style.display = 'none';
-        success.classList.add('visible');
-      } else {
-        btn.textContent = 'Try again';
-        btn.disabled = false;
-        alert('There was a problem sending your message. Please try emailing directly.');
-      }
-    } catch {
-      btn.textContent = 'Try again';
-      btn.disabled = false;
-    }
-  }
+// ── BOOT ───────────────────────────────────────────────────────────
+loadContent();
 </script>
 </body>
 </html>
