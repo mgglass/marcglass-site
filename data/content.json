@@ -1,1 +1,279 @@
+{
+  "site": {
+    "title": "Marc Glass Strategic Communications and Photography",
+    "nav_name": "Marc Glass",
+    "nav_tagline": "Strategic Communications & Photography"
+  },
 
+  "home": {
+    "hero_headline": "Telling stories that <em>matter.</em>",
+    "hero_tagline": "Award-winning writer, photographer, and communications strategist with decades of experience crafting compelling narratives across print, digital, and social media platforms.",
+    "cta_banner_headline": "Ready to tell your story?",
+    "cta_banner_text": "Available for writing assignments, photography projects, communications consulting, and speaking engagements.",
+    "hero_photos": [
+      { "src": "", "alt": "Photo 1" },
+      { "src": "", "alt": "Photo 2" },
+      { "src": "", "alt": "Photo 3" },
+      { "src": "", "alt": "Photo 4" },
+      { "src": "", "alt": "Photo 5" },
+      { "src": "", "alt": "Photo 6" }
+    ]
+  },
+
+  "about": {
+    "headline": "Writer. Photographer. Communications Strategist.",
+    "bio_paragraph_1": "This is where your bio goes. Replace this placeholder text with your own story — your background, your areas of expertise, the publications and clients you've worked with, and what drives your work.",
+    "bio_paragraph_2": "You might talk about your journalism career, your photography practice, and how the two disciplines inform each other. Mention notable projects, awards, or recognitions that establish your credibility and voice.",
+    "bio_paragraph_3": "A third paragraph might speak to your approach — your philosophy as a storyteller, what you look for in a story, and the kinds of clients or collaborations you're most interested in pursuing.",
+    "photo": "",
+    "skills": [
+      "Feature Writing",
+      "Investigative Reporting",
+      "Documentary Photography",
+      "Editorial Photography",
+      "Social Media Strategy",
+      "Email Marketing",
+      "Infographic Design",
+      "Web Content",
+      "Press Relations",
+      "Media Pitching"
+    ],
+    "faq": [
+      {
+        "question": "What kinds of writing projects do you take on?",
+        "answer": "Replace this with your actual answer. I work on feature journalism, investigative reporting, profiles, essays, and editorial commentary for publications ranging from regional outlets to national magazines. I'm also available for branded content, white papers, and long-form web copy."
+      },
+      {
+        "question": "Are you available for photography assignments outside Maine?",
+        "answer": "Replace this with your actual answer. Yes — I travel for documentary, portrait, and editorial assignments. My home base is Maine, but I've worked throughout New England and beyond. Travel costs are discussed as part of project scoping."
+      },
+      {
+        "question": "How does your communications consulting work?",
+        "answer": "Replace this with your actual answer. I work with organizations and individuals to develop communications strategies, craft key messages, manage media relationships, and create the written and visual content that brings those strategies to life. Engagements range from one-time projects to ongoing retainer arrangements."
+      },
+      {
+        "question": "What is your typical turnaround time?",
+        "answer": "Replace this with your actual answer. Turnaround depends on the scope and complexity of the project. For shorter pieces, I can often turn around a first draft within a week. Larger projects are scoped and scheduled individually. I'm happy to discuss your timeline during our initial conversation."
+      },
+      {
+        "question": "Do you offer speaking engagements or workshops?",
+        "answer": "Replace this with your actual answer. Yes. I speak on topics including visual storytelling, narrative journalism, communications strategy, and the intersection of photography and writing. I also lead workshops for journalists, communications professionals, and organizations. Reach out through the contact page to discuss."
+      }
+    ]
+  },
+
+  "writing": {
+    "page_description": "A selection of published work spanning feature journalism, investigative reporting, and editorial commentary across leading regional and national publications.",
+    "articles": [
+      {
+        "title": "Article Title Goes Here",
+        "publication": "Publication Name",
+        "year": "2024",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Second Article Title Here",
+        "publication": "Publication Name",
+        "year": "2024",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Third Article Title Here",
+        "publication": "Publication Name",
+        "year": "2023",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Fourth Article Title Here",
+        "publication": "Publication Name",
+        "year": "2023",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Fifth Article Title Here",
+        "publication": "Publication Name",
+        "year": "2022",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Sixth Article Title Here",
+        "publication": "Publication Name",
+        "year": "2022",
+        "excerpt": "A brief excerpt or description of the article — two or three sentences giving readers a sense of the story and why it matters.",
+        "pullquote": "A compelling pull quote from the article goes here — one memorable sentence that draws the reader in.",
+        "url": "",
+        "image": ""
+      }
+    ]
+  },
+
+  "photography": {
+    "page_description": "Documentary, portrait, and editorial photography. Click any image to view full size.",
+    "slideshow": [
+      { "src": "", "caption": "Featured photograph — add your caption here" },
+      { "src": "", "caption": "Featured photograph — add your caption here" },
+      { "src": "", "caption": "Featured photograph — add your caption here" }
+    ],
+    "gallery": [
+      { "src": "", "caption": "Photo caption here", "height": 280 },
+      { "src": "", "caption": "Photo caption here", "height": 380 },
+      { "src": "", "caption": "Photo caption here", "height": 220 },
+      { "src": "", "caption": "Photo caption here", "height": 320 },
+      { "src": "", "caption": "Photo caption here", "height": 260 },
+      { "src": "", "caption": "Photo caption here", "height": 420 },
+      { "src": "", "caption": "Photo caption here", "height": 300 },
+      { "src": "", "caption": "Photo caption here", "height": 240 },
+      { "src": "", "caption": "Photo caption here", "height": 360 },
+      { "src": "", "caption": "Photo caption here", "height": 200 },
+      { "src": "", "caption": "Photo caption here", "height": 340 },
+      { "src": "", "caption": "Photo caption here", "height": 290 }
+    ]
+  },
+
+  "social": {
+    "page_description": "Strategic social media campaigns, content calendars, and email marketing programs that build engaged audiences and drive measurable results.",
+    "projects": [
+      {
+        "title": "Campaign or Project Title Here",
+        "category": "Social Media Campaign",
+        "year": "2024",
+        "excerpt": "Description of this project — the client, the goal, the strategy, and the results achieved.",
+        "pullquote": "A compelling pull quote or result from this campaign — one memorable line.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Email Marketing Campaign Title",
+        "category": "Email Newsletter",
+        "year": "2024",
+        "excerpt": "Description of this project — the client, the goal, the strategy, and the results achieved.",
+        "pullquote": "A compelling pull quote or result from this campaign — one memorable line.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Third Social Project Title",
+        "category": "Instagram Strategy",
+        "year": "2023",
+        "excerpt": "Description of this project — the client, the goal, the strategy, and the results achieved.",
+        "pullquote": "A compelling pull quote or result from this campaign — one memorable line.",
+        "url": "",
+        "image": ""
+      }
+    ]
+  },
+
+  "infographics": {
+    "page_description": "Data visualization and infographic design that transforms complex information into clear, engaging, and shareable visual stories.",
+    "projects": [
+      {
+        "title": "Infographic Title Here",
+        "category": "Data Visualization",
+        "year": "2024",
+        "excerpt": "What data it visualizes, who it was created for, and what story it tells.",
+        "pullquote": "A compelling line about what this infographic reveals or why it matters.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Second Infographic Title",
+        "category": "Data Visualization",
+        "year": "2024",
+        "excerpt": "What data it visualizes, who it was created for, and what story it tells.",
+        "pullquote": "A compelling line about what this infographic reveals or why it matters.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Third Infographic Title",
+        "category": "Data Visualization",
+        "year": "2023",
+        "excerpt": "What data it visualizes, who it was created for, and what story it tells.",
+        "pullquote": "A compelling line about what this infographic reveals or why it matters.",
+        "url": "",
+        "image": ""
+      }
+    ]
+  },
+
+  "webcontent": {
+    "page_description": "SEO-optimized web copy, landing pages, blog content, and digital content strategy that engages audiences and drives results.",
+    "projects": [
+      {
+        "title": "Web Project Title Here",
+        "category": "Website Copy",
+        "year": "2024",
+        "excerpt": "The client, the platform, the content strategy, and the outcome.",
+        "pullquote": "A compelling line about this project's impact or approach.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Second Web Content Title",
+        "category": "Blog Content",
+        "year": "2024",
+        "excerpt": "The client, the platform, the content strategy, and the outcome.",
+        "pullquote": "A compelling line about this project's impact or approach.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Third Web Content Title",
+        "category": "Landing Page",
+        "year": "2023",
+        "excerpt": "The client, the platform, the content strategy, and the outcome.",
+        "pullquote": "A compelling line about this project's impact or approach.",
+        "url": "",
+        "image": ""
+      }
+    ]
+  },
+
+  "publicity": {
+    "page_description": "Press releases, media pitches, and public relations campaigns that earn meaningful media coverage for clients and causes that matter.",
+    "projects": [
+      {
+        "title": "Publicity Project Title Here",
+        "category": "Press Release",
+        "year": "2024",
+        "excerpt": "The client, the campaign goals, the media outlets targeted, and the coverage achieved.",
+        "pullquote": "A compelling line about the coverage or impact achieved.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Second Publicity Project",
+        "category": "Media Campaign",
+        "year": "2024",
+        "excerpt": "The client, the campaign goals, the media outlets targeted, and the coverage achieved.",
+        "pullquote": "A compelling line about the coverage or impact achieved.",
+        "url": "",
+        "image": ""
+      },
+      {
+        "title": "Third Publicity Project",
+        "category": "PR Strategy",
+        "year": "2023",
+        "excerpt": "The client, the campaign goals, the media outlets targeted, and the coverage achieved.",
+        "pullquote": "A compelling line about the coverage or impact achieved.",
+        "url": "",
+        "image": ""
+      }
+    ]
+  }
+}
